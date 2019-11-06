@@ -1329,7 +1329,8 @@
  				// $('#subkategori').val(data.menu);
  				// $('#status').val(data.status);
 
- 				// $('#idmenu').val(data.idmenu);
+ 				// $('#filebrand').val(data.filebrand);
+ 				$('#idbrand').val(data.idbrand);
 
  				$('.modal_form_Brand').modal({
  					show: true,
@@ -1676,14 +1677,19 @@
 
  			var nama = $('#judulbrand').val();
  			var file = $('#filebrand').val();
-
+ 			var id = $('#idbrand').val();
  			if (nama == "") {
  				alert("Judul Harus diisi");
  			} else if (file == "") {
  				alert("Gambar brand harus diisi");
  			} else {
  				var data = new FormData(this);
- 				var url = "<?php echo site_url('brand/createaction') ?>";
+ 				var url = "";
+ 				if (save_method == 'update') {
+ 					url = "<?php echo site_url('brand/updateaction') ?>";
+ 				}
+ 				url = "<?php echo site_url('brand/createaction') ?>";
+
  				$.ajax({
  					url: url,
  					type: "post",

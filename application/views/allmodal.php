@@ -201,7 +201,7 @@
              <form id="form_brand" class="form-sample" enctype="multipart/form-data" method="post">
                  <div class="modal-body">
 
-                     <input type="hidden" value="" name="idbrand" />
+                     <input type="hidden"  name="idbrand" />
 
                      <div class="row">
                          <div class="col-md-6">

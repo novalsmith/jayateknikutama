@@ -78,6 +78,26 @@ class Brand extends CI_Controller
     
     }
 
+
+    public function updateaction()
+    {
+        $id = $this->input->post('idbrand');
+
+        $data = array(
+            'judul' => $this->input->post('judulbrand', TRUE),
+            'filebrand' => $this->_uploadImage(),
+            'createdate' => date("d-m-y")
+
+        );
+        $this->db->where('idbrand',$id);
+        $datacek =  $this->db->update('brand', $data);
+        if ($datacek) {
+            echo json_encode(array('success' => 'ok', 'data' => $data));
+        } else {
+            echo json_encode(array('success' => 'no', 'data' => $data));
+        }
+    }
+
     public function jsonEdit($id)
     {
          
