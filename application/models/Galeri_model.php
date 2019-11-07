@@ -18,18 +18,19 @@ class Galeri_model extends CI_Model
  
     // datatables
     function json() {
-        $this->datatables->select('idgalery,galeri.idkategori,count(galeri.idkategori) as                              total,kategori.nama_kategori');
+        $this->datatables->select('idgalery,kategorimenu.menu,galeri.idmenu,count(galeri.idmenu) as   
+                                    total');
         $this->datatables->from('galeri');
-        $this->datatables->group_by('galeri.idkategori,galeri.idkategori');
+        $this->datatables->group_by('galeri.idmenu,galeri.idmenu');
 
         //add this line for join
-        $this->datatables->join('kategori', 'kategori.idkategori = galeri.idkategori');
+        $this->datatables->join('kategorimenu', 'kategorimenu.idmenu = galeri.idmenu');
        
 
        $this->datatables->add_column('Total', '
               <a href=" '.site_url('galeri/totaldetail/$2').' " class="totaldetail_record
                label label-sm label-success" data-code="$1" 
-              data-hapus="$1">  $3</a>  ',  'idgalery,idkategori,total');
+              data-hapus="$1">  $3</a>  ',  'idgalery,idmenu,total');
 
 $this->datatables->add_column('action', '
   <a href="javascript:void(0);" class="delete_record label label-sm label-danger" data-code="$1" 

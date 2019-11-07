@@ -337,7 +337,7 @@
  				dataType: "JSON",
  				success: function(data) {
 
- 					// console.log(data);
+ 					console.log(data);
  					var res = data.data["tags"].split(",");
 
  					$('.judul').text(data.data['name']);
@@ -345,7 +345,7 @@
  					$('.tglview').text(tglindonesia(data.data['create_date']));
 
  					$.each(res, function(i, data) {
- 						$('#tagsview').append(` 
+ 						$('#tagsviews').append(` 
                  
                           
                                         <li>
@@ -482,7 +482,7 @@
  					"data": "idgalery",
  					"orderable": false
  				}, {
- 					"data": "nama_kategori"
+ 					"data": "menu"
  				},
  				{
  					"data": "Total",
@@ -533,7 +533,18 @@
  				}, {
  					"data": "judul"
  				}, {
- 					"data": "filebrand"
+ 					"data": "filebrand",
+ 					"render": function(img, type, full, meta) {
+ 						var datastatus = "";
+ 						if (img != "") {
+ 							datastatus = "<a target='blank' href=' <?php echo base_url('assets/img/brand/') ?>" + img + " ' class='label label-sm label-success'>View Img</a>";
+ 						} else {
+
+ 							datastatus = "<a href='javascript:void(0)' class='label label-sm label-danger'>No Img</a>";
+
+ 						}
+ 						return datastatus;
+ 					}
  				},
  				{
  					"data": "action",
@@ -608,7 +619,17 @@
  		// End delete Records
 
 
-
+ 		$('#mytablebrand').on('click', '.delete_brand', function() {
+ 			save_method = 'delete_brand';
+ 			var idbrand = $(this).data('code');
+ 			var judul = $(this).data('judul');
+ 			$('#modal_form_delete').modal('show');
+ 			$('#pesanheader').text('Anda Yakin Menghapus Brand ? ');
+ 			$('#pesan').text(judul);
+ 			$('#idbrand').val(idbrand);
+ 			$('#btnSave').text('Hapus'); //change button text
+ 			$('#btnSave').attr('disabled', false); //set button disable
+ 		});
 
  		$('#mytableartikel').on('click', '.view_artikel', function() {
  			save_method = 'view';
@@ -1110,6 +1131,7 @@
  		var idartikel = $('#idartikel').val();
  		var idproduk = $('#idproduk').val();
  		var idfaq = $('#idfaq').val();
+ 		var idbrand = $('#idbrand').val();
 
 
  		if (save_method == 'delete_kategori') {
@@ -1123,6 +1145,8 @@
  			url = "<?php echo site_url('products/delete/') ?>" + idproduk;
  		} else if (save_method == "delete_faq") {
  			url = "<?php echo site_url('contact/deletefaq/') ?>" + idfaq;
+ 		} else if (save_method == "delete_brand") {
+ 			url = "<?php echo site_url('brand/delete/') ?>" + idbrand;
  		}
 
 
@@ -1190,6 +1214,19 @@
  					CKEDITOR.instances['bantuan'].setData("");
  					save_method = "add";
  					$('#judulfaq').text("Tambah Bantuan");
+
+
+ 				} else if (data.status == true && save_method == 'delete_brand') {
+
+ 					Swal.fire({
+ 						position: 'top-end',
+ 						type: 'success',
+ 						title: data.data + ' \n Berhasil Terhapus ',
+ 						showConfirmButton: false,
+ 						timer: 2700
+ 					})
+
+
 
 
  				} else {
@@ -1299,7 +1336,7 @@
 
  	function add_brand() {
  		save_method = 'add';
- 		$('#form')[0].reset(); // reset form on modals
+ 		$('#form_brand')[0].reset(); // reset form on modals
 
 
  		$('.modal_form_Brand').modal({
@@ -1312,9 +1349,9 @@
 
 
  	$('#mytablebrand').on('click', '.edit_artikel', function() {
-
+ 		$('#form_brand')[0].reset();
  		var id = $(this).data('code');
-
+ 		save_method = 'update';
 
  		// 		Ajax Load data from ajax
  		$.ajax({
@@ -1339,7 +1376,7 @@
  				});
  				$('.modal-title').text('Edit Brand'); // Set title to Bootstrap modal title
 
- 				save_method = 'update';
+
 
  			},
  			error: function(jqXHR, textStatus, errorThrown) {
@@ -1678,17 +1715,22 @@
  			var nama = $('#judulbrand').val();
  			var file = $('#filebrand').val();
  			var id = $('#idbrand').val();
+
  			if (nama == "") {
  				alert("Judul Harus diisi");
- 			} else if (file == "") {
- 				alert("Gambar brand harus diisi");
  			} else {
- 				var data = new FormData(this);
+
  				var url = "";
  				if (save_method == 'update') {
  					url = "<?php echo site_url('brand/updateaction') ?>";
+ 				} else {
+ 					url = "<?php echo site_url('brand/createaction') ?>";
  				}
- 				url = "<?php echo site_url('brand/createaction') ?>";
+ 				console.log(url);
+
+ 				var data = new FormData(this);
+ 				data.append('idbrand', id);
+ 				data.append('judulbrand', nama);
 
  				$.ajax({
  					url: url,
@@ -1700,7 +1742,7 @@
  					cache: false,
  					async: false,
  					success: function(data) {
-
+ 						console.log(data);
  						if (data.success == "ok") {
  							Swal.fire({
  								position: 'top-end',
@@ -1718,7 +1760,7 @@
  								timer: 2700
  							})
  						}
-
+ 						$('.modal_form_Brand').modal('hide');
  						reload_table();
  					}
  				});
@@ -2219,7 +2261,7 @@
  		} else {
  			$("#errorSlideProduk").text("");
  			if (slideshowproduk == 1) {
- 				$("#errorInfoUkuranGambarSlideProduk").html("<strong>Perhatian</strong> ! <br/> Resolusi Harus Width : 1920px & Height : 720 ");
+ 				$("#errorInfoUkuranGambarSlideProduk").html("<strong>Perhatian</strong> ! <br/> Resolusi Harus Width : 1500px & Height : 495px ");
 
  			} else {
  				$("#errorInfoUkuranGambarSlideProduk").html("");

@@ -98,7 +98,7 @@
                     <small><?php echo $key->judulfoto ?></small> <br>
             <!-- <input type="hidden" name="idgaleri" id="idgaleri" value="<?php echo $key->idgalery ?>"> -->
                     <a class="label label-sm label-danger"   
-                    onclick="deletegaleri('<?php echo $key->idgalery ?>','<?php echo $key->nama_kategori ?>','<?php echo $key->foto ?>','<?php echo $key->judulfoto ?>');" javascript:void(0);> <i class="fa fa-trash-o"></i> Hapus </a>
+                    onclick="deletegaleri('<?php echo $key->idgalery ?>','<?php echo $key->menu ?>','<?php echo $key->foto ?>','<?php echo $key->judulfoto ?>');" javascript:void(0);> <i class="fa fa-trash-o"></i> Hapus </a>
              </div> 
   	
              <?php endforeach ?>

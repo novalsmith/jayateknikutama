@@ -23,7 +23,7 @@ class Brand_model extends CI_Model
             'action',
 
               '    <a href="javascript:void(0);" class="edit_artikel label label-sm label-info" data-code="$1" ><i class="fa fa-pencil"></i> Edit</a> 
-                <a href="javascript:void(0);" class="delete_artikel label label-sm label-danger" data-code="$1" data-judul="$2"><i class="fa fa-trash-o"></i> Hapus</a> 
+                <a href="javascript:void(0);" class="delete_brand label label-sm label-danger" data-code="$1" data-judul="$2"><i class="fa fa-trash-o"></i> Hapus</a> 
                   
             ',
             'idbrand,judul'

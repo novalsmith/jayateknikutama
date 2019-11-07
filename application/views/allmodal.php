@@ -201,7 +201,7 @@
              <form id="form_brand" class="form-sample" enctype="multipart/form-data" method="post">
                  <div class="modal-body">
 
-                     <input type="hidden"  name="idbrand" />
+                     <input type="hidden" name="idbrand" id="idbrand" />
 
                      <div class="row">
                          <div class="col-md-6">
@@ -221,7 +221,7 @@
                              </div>
 
                              <div class="form-group">
-                                 <img src=""   class="col-md-12" id="gambarbrand" alt="">
+                                 <img src="" width="200" class="col-md-12" id="gambarbrand" alt="">
                              </div>
                          </div>
                      </div>
@@ -245,6 +245,7 @@
      <!-- /.modal-dialog -->
  </div>
 
+ 
 
  <div class="modal fade modal_form_user" id="basic" tabindex="-1" role="dialog" aria-hidden="true">
      <div class="modal-dialog modal-basic">
@@ -579,22 +580,22 @@
                      <div class="portlet-body">
                          <ul class="nav nav-tabs">
                              <li class="active">
-                                 <a href="#tab_1_1" data-toggle="tab">
+                                 <a href="#tab_1_1s" data-toggle="tab">
                                      Judul Produk </a>
                              </li>
                              <li>
-                                 <a href="#tab_1_2" data-toggle="tab">
+                                 <a href="#tab_1_2s" data-toggle="tab">
                                      Kategori, Status, Gambar </a>
                              </li>
 
                              <li>
-                                 <a href="#tab_1_3" data-toggle="tab">
+                                 <a href="#tab_1_3s" data-toggle="tab">
                                      Deskripsi Produk <i class="fa fa-comments"></i> </a>
                              </li>
 
                          </ul>
                          <div class="tab-content">
-                             <div class="tab-pane fade active in" id="tab_1_1">
+                             <div class="tab-pane fade active in" id="tab_1_1s">
                                  <div class="form-group">
                                      <label for="exampleInputEmail1">Judul Produk</label>
                                      <input name="judulproduk" type="text" class="form-control input-lg" onkeyup="OncekjudulProduk();" id="judulproduk" placeholder="Masukan Judul Produk" style="height: 60px; font-size: 15pt">
@@ -603,7 +604,7 @@
 
 
                              </div>
-                             <div class="tab-pane fade" id="tab_1_2">
+                             <div class="tab-pane fade" id="tab_1_2s">
 
                                  <div class="col-md-4">
                                      <div class="form-group">
@@ -676,7 +677,7 @@
                              </div>
 
 
-                             <div class="tab-pane fade" id="tab_1_3">
+                             <div class="tab-pane fade" id="tab_1_3s">
                                  <div class="form-group">
                                      <label for="exampleInputPassword1">Isi Produk</label> <br>
                                      <span class="text text-danger" id="errorIsiProduk"></span>

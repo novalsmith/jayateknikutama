@@ -61,13 +61,21 @@ class Brand extends CI_Controller
     
     public function createaction() 
     {
-       
+        if ($this->_uploadImage() == null) {
             $data = array(
 		'judul' => $this->input->post('judulbrand',TRUE),
-		'filebrand' => $this->_uploadImage(),
+		// 'filebrand' => $this->_uploadImage(),
 		'createdate' => date("d-m-y")
 		 
-	    );
+        );
+    }else{
+            $data = array(
+                'judul' => $this->input->post('judulbrand', TRUE),
+                'filebrand' => $this->_uploadImage(),
+                'createdate' => date("d-m-y")
+
+            );
+    }
 
            $datacek =  $this->db->insert('brand',$data);
         if ($datacek) {
@@ -82,17 +90,24 @@ class Brand extends CI_Controller
     public function updateaction()
     {
         $id = $this->input->post('idbrand');
-
+        if ($this->_uploadImage() == null) {
+      
         $data = array(
             'judul' => $this->input->post('judulbrand', TRUE),
-            'filebrand' => $this->_uploadImage(),
+            // 'filebrand' => $this->_uploadImage(),
             'createdate' => date("d-m-y")
-
         );
+    }else{
+            $data = array(
+                'judul' => $this->input->post('judulbrand', TRUE),
+                'filebrand' => $this->_uploadImage(),
+                'createdate' => date("d-m-y")
+            );
+    }
         $this->db->where('idbrand',$id);
         $datacek =  $this->db->update('brand', $data);
         if ($datacek) {
-            echo json_encode(array('success' => 'ok', 'data' => $data));
+            echo json_encode(array('success' => 'ok','idbrand'=>$id, 'data' => $data));
         } else {
             echo json_encode(array('success' => 'no', 'data' => $data));
         }
@@ -153,18 +168,26 @@ class Brand extends CI_Controller
             redirect(site_url('barang'));
         }
     }
-    
-    public function delete($id) 
-    {
-        $row = $this->Barang_model->get_by_id($id);
 
-        if ($row) {
-            $this->Barang_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('barang'));
+
+    public function delete($id)
+    {
+        $row = $this->db->query("select filebrand,idbrand,judul from brand where idbrand=".$id)->row();
+         if ($row) {
+            unlink('./assets/img/brand/' . $row->filebrand);
+            $this->db->delete('brand', array('idbrand' => $row->idbrand));
+
+            $data = array(
+                'status' => true,
+                'data'   => $row->judul
+            );
+            echo json_encode($data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('barang'));
+            $data = array(
+                'status' => false
+
+            );
+            echo json_encode($data);
         }
     }
 

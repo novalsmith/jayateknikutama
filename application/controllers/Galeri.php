@@ -149,7 +149,7 @@ public function upload_image(){
     
           
                             $simpan = array(
-                                  'idkategori' => $this->input->post('kategori'),
+                                  'idmenu' => $kategori,
                                   'foto' => $status['pesan'],
                                   'judulfoto' => $this->input->post('judulfoto'),
                                   'create_date' => date('Y-m-d H:i:s')
@@ -183,7 +183,7 @@ public function upload_image(){
 {
     $config['upload_path']          = './assets/img/galeri';
     $config['allowed_types']        = 'gif|jpg|png|jpeg';
-    $config['file_name']            = 'haditerpal_'.date('dMyHis');
+    $config['file_name']            = 'jayatknikutama_'.date('dMyHis');
 
     $config['overwrite']            = true;
     $config['max_size']             = 3000; // 3MB
@@ -214,8 +214,9 @@ public function upload_image(){
     {
         $totaldetail = 
         $this->db->query("
-            select idgalery,nama_kategori,g.idkategori,foto,judulfoto  from galeri g join kategori k on g.idkategori = k.idkategori
-            where      g.idkategori = '".$kategori."'  
+            select idgalery,menu,g.idmenu,foto,judulfoto  from galeri g join
+             kategorimenu k on g.idmenu = k.idmenu
+            where      g.idmenu = '".$kategori."'  
             ") ;
         $namegaleri = $totaldetail->row(); 
         $data = array(
@@ -225,7 +226,7 @@ public function upload_image(){
             // 'breadcrumb'     => $breadcrumb,
 
             'totaldetail'         => $totaldetail,
-            'judul'     => 'Galeri '.$namegaleri->nama_kategori,
+            'judul'     => 'Galeri '.$namegaleri->menu,
             'judulweb'      => 'Silat Sampah',
             'judul_page'    => 'Kategori'
 
