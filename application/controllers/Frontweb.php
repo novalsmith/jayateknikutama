@@ -34,4 +34,11 @@ class Frontweb extends CI_Controller
 
         $this->load->view('frontTemplate', $data);
     }
+
+    public function jsonproduk()
+    {
+        $this->db->where('slideshow',1);
+         $data = $this->db->get('products')->result();
+        echo json_encode($data);
+        }
 }

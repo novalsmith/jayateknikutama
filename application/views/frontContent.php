@@ -139,7 +139,7 @@
               function has_children($rows, $id)
               {
                 foreach ($rows as $row) {
-                  if ($row['parent_id'] == $id) { // untuk dapat sub menu 
+                  if ($row['parentid'] == $id) { // untuk dapat sub menu 
                     return true;
                   }
                 }
@@ -147,12 +147,14 @@
               }
               function build_menu($rows, $parent = 0)
               {
+
+
                 $result = "<ul>";
                 foreach ($rows as $row) {
-                  if ($row['parent_id'] == $parent) {
-                    $result .= "<li class='dropdown-submenu'> <a href=' " . $row['category'] . " '> {$row['category']}</a>";
-                    if (has_children($rows, $row['id'])) { // pengecekan sub menu
-                      $result .= " <i  class='fa fa-angle-right'></i> <ul class='dropdown-menu' role='menu'> " . build_menu($rows, $row['id']) . "</ul>";
+                  if ($row['parentid'] == $parent) {
+                    $result .= "<li class='dropdown-submenu'> <a href=' " . $row['slugmenu'] . " '> {$row['menu']}</a>";
+                    if (has_children($rows, $row['idmenu'])) { // pengecekan sub menu
+                      $result .= " <i  class='fa fa-angle-right'></i> <ul class='dropdown-menu' role='menu'> " . build_menu($rows, $row['idmenu']) . "</ul>";
                     }
                     $result .= "</li>";
                   }
@@ -160,22 +162,40 @@
                 $result .= "</ul>";
                 return $result;
               }
-              $category = array(
-                array('id' => 1, 'parent_id' => 0, 'category' => 'Motor'),
-                array('id' => 2, 'parent_id' => 0, 'category' => 'Mobil'),
-                array('id' => 3,  'parent_id' => 1, 'category' => 'Honda'),
-                array('id' => 4,  'parent_id' => 2, 'category' => 'Yamaha'),
-                array('id' => 5,  'parent_id' => 3, 'category' => 'CBR'),
-                array('id' => 6,  'parent_id' => 3, 'category' => 'CRF'),
-                array('id' => 7,  'parent_id' => 6, 'category' => 'CRF 150'),
-                array('id' => 8,  'parent_id' => 6, 'category' => 'CRF 250'),
-                array('id' => 9,  'parent_id' => 3, 'category' => 'PCX'),
+              //         $category = array(
+              //           array('id' => 1, 'parent_id' => 0, 'category' => 'Motor'),
+              //           array('id' => 2, 'parent_id' => 0, 'category' => 'Mobil'),
+              //           array('id' => 3,  'parent_id' => 1, 'category' => 'Honda'),
+              //           array('id' => 4,  'parent_id' => 2, 'category' => 'Yamaha'),
+              //           array('id' => 5,  'parent_id' => 3, 'category' => 'CBR'),
+              //           array('id' => 6,  'parent_id' => 3, 'category' => 'CRF'),
+              //           array('id' => 7,  'parent_id' => 6, 'category' => 'CRF 150'),
+              //           array('id' => 8,  'parent_id' => 6, 'category' => 'CRF 250'),
+              //           array('id' => 9,  'parent_id' => 3, 'category' => 'PCX'),
 
-              );
+              //         );
+              //         $db = $this->db->get('kategorimenu')->result_array();
+              //         $arr = array();
+              //         foreach ($db as $key) {
+              //           $setarr = array('id' => $key['idmenu'] ,
+              //                           'parent_id' => $key['parentid'],
+              //                         'category' =>$key['menu'] );
+              //           // print_r($setArray);
+              //          $arr[] = $setarr;
+              //         }
+              $rows = $this->db->query('select * from kategorimenu')->result_array();
+              echo build_menu($rows, 0);
+
+              // foreach ($arr as $key) {
+              //   # code...
+              //   echo $key['id'];
+              // }
               ?>
 
 
-              <?php echo build_menu($category, 0); ?>
+
+
+
 
               <!-- <ul>
                         <li class="dropdown-submenu">
@@ -286,109 +306,13 @@
   <div id="layerslider" style="width: 100%; height: 494px; margin: 0 auto;">
 
 
-    <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
-
-      <img src="<?php echo base_url() ?>assetss/frontend/pages/img/layerslider/slide1/bg1.jpg" class="ls-bg" alt="Slide background">
-
-      <div class="ls-l ls-title" style="top: 35%; left: 60%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationin: 750; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          rotatein: 90; 
-          rotateout: -90; 
-          scalein: .5; 
-          scaleout: .5; 
-          showuntil: 4000;">
-        The most<br>
-        wanted bijouterie
-      </div>
-
-      <div class="ls-l ls-mini-text" style="top: 70%; left: 60%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true;  
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          delayin: 300; 
-          scalein: .8; 
-          scaleout: .8; 
-          showuntil: 4000;">
-        <span>Lorem ipsum and</span>
-        <a href="javascript:;">Buy It Now!</a>
-      </div>
-
-    </div>
+   
 
 
-    <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
 
-      <img src="<?php echo base_url() ?>assetss/frontend/pages/img/layerslider/slide5/bg1.jpg" class="ls-bg" alt="Slide background">
-
-      <div class="ls-l ls-title" style="top: 35%; left: 60%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationin: 750; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          rotatein: 90; 
-          rotateout: -90; 
-          scalein: .5; 
-          scaleout: .5; 
-          showuntil: 4000;">
-        The most<br>
-        wanted bijouterie
-      </div>
-
-      <div class="ls-l ls-mini-text" style="top: 70%; left: 60%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true;  
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          delayin: 300; 
-          scalein: .8; 
-          scaleout: .8; 
-          showuntil: 4000;">
-        <span>Lorem ipsum and</span>
-        <a href="javascript:;">Buy It Now!</a>
-      </div>
-
-    </div>
 
     <!-- slide four start -->
-    <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
 
-      <img src="<?php echo base_url() ?>assetss/frontend/pages/img/layerslider/slide3/bg1.jpg" class="ls-bg" alt="Slide background">
-
-      <div class="ls-l ls-title" style="top: 35%; left: 60%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationin: 750; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          rotatein: 90; 
-          rotateout: -90; 
-          scalein: .5; 
-          scaleout: .5; 
-          showuntil: 4000;">
-        The most<br>
-        wanted bijouterie
-      </div>
-
-      <div class="ls-l ls-mini-text" style="top: 70%; left: 60%; white-space: nowrap;" data-ls="
-          fade: true; 
-          fadeout: true;  
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          delayin: 300; 
-          scalein: .8; 
-          scaleout: .8; 
-          showuntil: 4000;">
-        <span>Lorem ipsum and</span>
-        <a href="javascript:;">Buy It Now!</a>
-      </div>
-
-    </div>
     <!-- slide four end -->
   </div>
   <!-- LayerSlider end -->

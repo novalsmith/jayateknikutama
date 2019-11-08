@@ -49,6 +49,8 @@ class Products extends CI_Controller
     echo $this->Products_model->json();
   }
 
+  
+
 
   public function read($id)
   {

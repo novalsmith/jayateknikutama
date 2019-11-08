@@ -44,7 +44,10 @@ class Kategori_model extends CI_Model
 		return $this->db->get($this->table)->result();
 	}
 
-
+public function getdatamenu()
+{
+	return $this->db->get('kategorimenu')->result_array();
+}
 	// get all
 	function get_allKategori()
 	{
