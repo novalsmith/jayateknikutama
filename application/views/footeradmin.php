@@ -423,6 +423,9 @@
  					"data": "name"
  				},
  				{
+ 					"data": "judul"
+ 				},
+ 				{
  					"data": "menu"
  				},
 
@@ -1728,6 +1731,27 @@
  		});
 
 
+
+
+ 		$.ajax({
+ 			url: "<?php echo base_url('frontweb/jsonproduk_brand') ?>",
+ 			type: "GET",
+ 			dataType: "JSON",
+ 			success: function(data) {
+
+
+ 				$.each(data, function(key, value) {
+
+ 					$('#brandshow').append('<option value="' + value.idbrand + '">' + value.judul + '</option>');
+
+ 				});
+ 			},
+ 			error: function(jqXHR, textStatus, errorThrown) {
+ 				alert('Error get data from ajax');
+ 			}
+ 		});
+
+
  		$('#form_brand').submit(function(e) {
  			e.preventDefault();
 
@@ -2159,6 +2183,18 @@
 
  	}
 
+ 	function OncekBrands() {
+ 		var brand = document.getElementById("brandshow").value;
+
+ 		if (brand == '') {
+ 			$("#errorbrandshow").text("Brand Tidak Boleh Kosong");
+
+ 		} else {
+ 			$("#errorbrandshow").text("");
+ 		}
+
+ 	}
+
 
  	function Onchecjudulfoto() {
  		var judulfoto = document.getElementById("judulfoto").value;
@@ -2505,12 +2541,12 @@
  		var idkategoriproduk = document.getElementById("idkategoriproduk").value;
  		var idproduk = document.getElementById("idproduk").value;
  		var judul = document.getElementById("judulproduk").value;
+ 		var brandshow = document.getElementById("brandshow").value;
  		var isiartikel = CKEDITOR.instances["isiproduk"].getData();
  		var statuspost = $(".statusproduk").val();
  		var slideshow = $(".slideshowproduk").val();
  		var fotoold = document.getElementById("imgInpHiddenProduk").value;
  		var tags = $("#tagsinput").val();
-
 
 
  		if (idkategoriproduk == '' && judul == '' && isiartikel == '' && tags == '' && statuspost == '' && slideshow == '') {
@@ -2539,6 +2575,9 @@
  			} else if (tags == '') {
  				$("#errorTagsProduk").text("Tags Tidak Boleh Kosong");
 
+ 			} else if (brandshow == '') {
+ 				$("#errorbrandshow").text("Brand Tidak Boleh Kosong");
+
  			} else {
 
 
@@ -2554,6 +2593,7 @@
  				var data = new FormData(this);
  				data.append('idproduk', idproduk);
  				data.append('idkategoriproduk', idkategoriproduk);
+ 				data.append('brandshow', brandshow);
  				data.append('judulproduk', judul);
  				data.append('isiproduk', isiartikel);
  				data.append('status', statuspost);
@@ -2631,6 +2671,7 @@
  					CKEDITOR.instances['isiproduk'].setData(data.data['description']);
  					$('[name="judulproduk"]').val(data.data['name']);
  					$('#idkategoriproduk').val(data.data['idmenu']);
+ 					$('#brandshow').val(data.data['idbrand']);
  					$('#imgInpHiddenProduk').val(data.data["image"]);
  					$('#idproduk').val(data.data["id"]);
  					// $('[name="judul"]').val(data.data['title']);

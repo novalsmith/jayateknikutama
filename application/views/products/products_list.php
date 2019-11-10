@@ -45,6 +45,7 @@
                          <tr>
                              <th>No</th>
                              <th>Nama Produk</th>
+                             <th>Brand</th>
                              <th>Kategori</th>
                              <th>Slide Show</th>
                              <th>Status</th>

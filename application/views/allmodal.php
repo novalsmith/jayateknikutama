@@ -245,7 +245,7 @@
      <!-- /.modal-dialog -->
  </div>
 
- 
+
 
  <div class="modal fade modal_form_user" id="basic" tabindex="-1" role="dialog" aria-hidden="true">
      <div class="modal-dialog modal-basic">
@@ -619,6 +619,21 @@
 
                                              </select>
                                              <span class="text text-danger" id="errorKategoriProduk"></span>
+
+                                         </div>
+                                     </div>
+
+
+                                     <div class="form-group">
+                                         <label for="exampleInputEmail1">Brand</label>
+
+                                         <div id="load">
+
+                                             <select id="brandshow" class="form-control" onchange="OncekBrands();" name="brandshow">
+                                                 <option value="">--Pilih Brand--</option>
+
+                                             </select>
+                                             <span class="text text-danger" id="errorbrandshow"></span>
 
                                          </div>
                                      </div>

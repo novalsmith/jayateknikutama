@@ -23,11 +23,13 @@ class Products_model extends CI_Model
                                  kategorimenu.menu,
                                  kategorimenu.parentid,
                                  kategorimenu.idmenu,
+                                 brand.judul,
                                  description,
                                  image,slideshow,
                                  products.status');
         $this->datatables->from('products');
         $this->datatables->join('kategorimenu', 'kategorimenu.idmenu = products.idmenu');
+        $this->datatables->join('brand', 'brand.idbrand = products.idbrand');
         //add this line for join
         //$this->datatables->join('table2', 'products.field = table2.field');
         $this->datatables->add_column(

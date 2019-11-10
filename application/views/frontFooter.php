@@ -29,6 +29,32 @@
 		jQuery(document).ready(function() {
 
 			$.ajax({
+				url: "<?php echo base_url('frontweb/jsonproduk_brand') ?>",
+				type: "GET",
+				dataType: "JSON",
+				success: function(data) {
+
+
+					$.each(data, function(key, value) {
+
+						$('#brandlist').append(`  <li><i class="fa fa-angle-right"></i> <a href="` + value.idbrand + "/" + value.judul + `">` + value.judul + `</a></li>`);
+
+
+						$('#brandmenu').append(` 
+						      <a class="col-md-3" href="shop-product-list.html">
+							  <img class="col-md-12 img-responsive" src="<?php echo base_url() ?>assets/img/brand/` + value.filebrand + ` 
+							   " alt="` + value.judul + `" title="` + value.judul + `"></a>
+
+						`);
+
+					});
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert('Error get data from ajax');
+				}
+			});
+
+			$.ajax({
 				url: "<?php echo site_url('frontweb/jsonproduk_All') ?>",
 				type: "GET",
 				dataType: "JSON",
@@ -36,7 +62,7 @@
 				success: function(data) {
 
 					$.each(data.kategori, function(key, val) {
-						console.log(val);
+						// console.log(val);
 						// if (val.total == 2) {
 						// 	console.log(val);
 						// }
@@ -50,26 +76,21 @@
 
 					});
 
-					$.each(data.brand, function(key, val) {
-						console.log(val);
-						// if (val.total == 2) {
-						// 	console.log(val);
-						// }
-				 var brand = `
-						<a href = "shop-product-list.html" > 
-						<img class='col-md-12 img-responsive' src = "<?php echo base_url() ?>assets/img/brand/` + val.filebrand + `"
-			alt = "`+val.judul+`"
-			title = "`+val.judul+`"> </a>
-						`;
+					$('#tlp1').text(data.webprofil[0].tlp1);
+					$('#tlp1jtm').text(data.webprofil[0].tlp1);
+					$('#emailjtm').text(data.webprofil[0].email);
+					$('#aboutus').html(data.about[0].keterangan);
+					$('#contactjtm').html(data.contact[0].keterangan);
+					$('#contactmenu').html(data.contact[0].keterangan);
+					$('#aboutmenu').html(data.about[0].keterangan);
+					$('#profiljtm').text(data.webprofil[0].profil);
+					$('#nameweb').html(data.webprofil[0].namaweb);
 
-						$('#brandlogo').html(brand);
 
-					});
+
 
 				}
 			});
-
-
 
 
 
@@ -85,7 +106,7 @@
 					var temp = data.data;
 					var tmp = ``;
 					if (data.total <= 1) {
-						tmp = ` 
+						tmp += ` 
       <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
       <img src="<?php echo base_url() ?>assets/img/produk/` + data.data[0].image + `  " class="ls-bg" alt="Slide background">
       <div class="ls-l ls-title" style=" display: inline-block;  
@@ -109,12 +130,12 @@
       </div>
   </div>
          `;
-						$('#slidershowpage').append(tmp);
+						$('#slidershowpage').html(tmp);
 					} else {
 
 						$.each(temp, function(key, value) {
 							// console.log(value.image);
-							tmp = ` 
+							tmp += ` 
                                      <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
 
       <img src="<?php echo base_url() ?>assets/img/produk/` + value.image + `  " class="ls-bg" alt="Slide background">
@@ -141,7 +162,7 @@
       </div>
   </div>
 		 `;
-							$('#slidershowpage').append(tmp);
+							$('#slidershowpage').html(tmp);
 						});
 					}
 

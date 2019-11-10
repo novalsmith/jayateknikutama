@@ -32,7 +32,8 @@ class Frontweb extends CI_Controller
             'produks'   =>    $this->db->query('select * from products where slideshow ="0" and status ="1"
                              order by id desc limit 10')->result(),
             'artikel'  =>    $this->db->query('select * from articles where   status ="1"
-                             order by idartikel desc limit 6')->result()
+                             order by idartikel desc limit 6')->result(),
+            'brand'     =>   $this->db->query('select * from brand   order by idbrand desc')->result()
            
 
 
@@ -50,19 +51,27 @@ class Frontweb extends CI_Controller
          echo json_encode($sets);
         }
 
+
+           public function jsonproduk_brand()
+    {
+        $brand = $this->db->query('select * from brand')->result();
+        echo json_encode($brand);
+
+    }
     public function jsonproduk_All()
     {
         
         // $data = $this->db->query('select * from products where slideshow ="0" order by id desc limit 10')->result();
-        // $artikel = $this->db->query('select * from articles   order by idartikel desc limit 6')->result();
-        $brand = $this->db->query('select * from brand   order by idbrand desc')->result();
+        $contact = $this->db->query('select * from contact')->result();
+        $webprofil = $this->db->query('select * from webprofil')->result();
+        
         $kategori = $this->db->query('select count(a.idmenu) as total,km.menu,a.idmenu,km.slugmenu from articles a
          join kategorimenu km on a.idmenu = km.idmenu where a.status =1 group by a.idmenu ')->result();
          $about = $this->db->get('about')->result();
         $sets = array(
             // 'terbaru' => $data,
-            // 'artikel' => $artikel,
-            'brand'    => $brand,
+            'contact' => $contact,
+            'webprofil'    => $webprofil,
             'kategori'  => $kategori,
             'about' => $about
     );
