@@ -162,92 +162,14 @@
                 $result .= "</ul>";
                 return $result;
               }
-              //         $category = array(
-              //           array('id' => 1, 'parent_id' => 0, 'category' => 'Motor'),
-              //           array('id' => 2, 'parent_id' => 0, 'category' => 'Mobil'),
-              //           array('id' => 3,  'parent_id' => 1, 'category' => 'Honda'),
-              //           array('id' => 4,  'parent_id' => 2, 'category' => 'Yamaha'),
-              //           array('id' => 5,  'parent_id' => 3, 'category' => 'CBR'),
-              //           array('id' => 6,  'parent_id' => 3, 'category' => 'CRF'),
-              //           array('id' => 7,  'parent_id' => 6, 'category' => 'CRF 150'),
-              //           array('id' => 8,  'parent_id' => 6, 'category' => 'CRF 250'),
-              //           array('id' => 9,  'parent_id' => 3, 'category' => 'PCX'),
 
-              //         );
-              //         $db = $this->db->get('kategorimenu')->result_array();
-              //         $arr = array();
-              //         foreach ($db as $key) {
-              //           $setarr = array('id' => $key['idmenu'] ,
-              //                           'parent_id' => $key['parentid'],
-              //                         'category' =>$key['menu'] );
-              //           // print_r($setArray);
-              //          $arr[] = $setarr;
-              //         }
               $rows = $this->db->query('select * from kategorimenu')->result_array();
               echo build_menu($rows, 0);
 
-              // foreach ($arr as $key) {
-              //   # code...
-              //   echo $key['id'];
-              // }
               ?>
 
 
-
-
-
-
-              <!-- <ul>
-                        <li class="dropdown-submenu">
-                          <a href="index.html">Multi level <i class="badge badge-info">6</i> <i
-                              class="fa fa-angle-right"></i></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="index.html">Second Level Link</a></li>
-                            <li><a href="index.html">Second Level Link</a></li>
-                            <li class="dropdown-submenu">
-                              <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                                Second Level Link
-                                <i class="fa fa-angle-right"></i>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="index.html">Third Level Link</a></li>
-                                <li><a href="index.html">Third Level Link</a></li>
-                                <li><a href="index.html">Third Level Link</a></li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </li>
-                       <li><a href="shop-product-list.html">Astro Trainers</a></li>
-                       <li><a href="shop-product-list.html">Basketball Shoes</a></li>
-                       <li><a href="shop-product-list.html">Boots</a></li>
-                          <li class="dropdown-submenu">
-                            <a href="index.html"> Framework <i class="badge badge-info">5</i> <i
-                                class="fa fa-angle-right"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="index.html">C#</a></li>
-                              <li><a href="index.html">Javascript</a></li>
-                              <li class="dropdown-submenu">
-                                <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                                  PHP
-                                  <i class="fa fa-angle-right"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                  <li><a href="index.html">Laravel</a></li>
-                                  <li><a href="index.html">Codeigniter</a></li>
-                                  <li><a href="index.html">Cake PHP</a></li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </li>
-                    
-                          <li><a href="shop-product-list.html">Astro Trainers</a></li>
-                          <li><a href="shop-product-list.html">Basketball Shoes</a></li>
-                          <li><a href="shop-product-list.html">Boots</a></li>
-                          
-                        </ul> -->
               <ul>
-                <li><a href="shop-product-list.html"> <span class="label label-warning">
-                      Another Category</span> </a></li>
 
               </ul>
 
@@ -301,12 +223,14 @@
 <!-- Header END -->
 
 <!-- BEGIN SLIDER -->
+
 <div class="page-slider margin-bottom-35">
+  <div id='loading'></div>
   <!-- LayerSlider start -->
   <div id="layerslider" style="width: 100%; height: 494px; margin: 0 auto;">
 
 
-   
+    <div id="slidershowpage"></div>
 
 
 
@@ -327,113 +251,38 @@
       <!-- BEGIN SALE PRODUCT -->
       <div class="col-md-12 sale-product">
         <h2>Produk Terbaru</h2>
-        <div class="owl-carousel owl-carousel5">
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/model1.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
+        <div class="owl-carousel owl-carousel4">
+
+          <?php
+          foreach ($produks as $key) {
+            ?>
+            <div>
+              <div class="product-item">
+                <div class="pi-img-wrapper">
+                  <img src="<?php echo base_url() . 'assets/img/produk/' . $key->image ?>" class="img-responsive" alt="Berry Lace Dress">
+                  <div>
+                    <a href="<?php echo base_url() . 'assets/img/produk/' . $key->image ?>" class="btn btn-default fancybox-button">Zoom</a>
+                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                  </div>
+                </div>
+                <h3><a href="<?php echo base_url() . $key->id . '/' . $key->slug ?>"> <?php echo $key->name ?> </a></h3>
+
+              </div>
+            </div>
+
+          <?php }
+          ?>
 
 
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/model1.jpg" class="btn btn-default fancybox-button">View</a>
-                  <!-- <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a> -->
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-              <div class="pi-price">Ada</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Pesan</a>
-              <div class="sticker sticker-sale"></div>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/model2.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/model2.jpg" class="btn btn-default fancybox-button">View</a>
-                  <!-- <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a> -->
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress2</a></h3>
-              <div class="pi-price-habis">Habis</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/model6.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/model6.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress2</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/model4.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="javascript:;">Berry Lace Dress4</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-              <div class="sticker sticker-new"></div>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/model5.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/model5.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress5</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/model3.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress3</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/model7.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress3</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-            </div>
-          </div>
+
+
+
+
         </div>
       </div>
-      <!-- END SALE PRODUCT -->
     </div>
+    <!-- END SALE PRODUCT -->
+
     <!-- END SALE PRODUCT & NEW ARRIVALS -->
 
     <!-- BEGIN SIDEBAR & CONTENT -->
@@ -443,92 +292,29 @@
       <div class="col-md-9 col-sm-8">
         <h2>Product Info</h2>
         <div class="owl-carousel owl-carousel3">
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+
+
+          <?php
+          foreach ($artikel as $key) {
+            ?>
+            <div>
+              <div class="product-item">
+                <div class="pi-img-wrapper">
+                  <img src="<?php echo base_url() . 'assets/img/small/' . $key->image ?>" class="img-responsive" alt="Berry Lace Dress">
+                  <div>
+                    <a href="<?php echo base_url() . 'assets/img/small/' . $key->image ?>" class="btn btn-default fancybox-button">Zoom</a>
+                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                  </div>
                 </div>
+                <h3><a href="<?php echo base_url() . $key->idartikel . '/' . $key->slug ?>"> <?php echo $key->title ?> </a></h3>
+
               </div>
-              <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-              <div class="sticker sticker-new"></div>
             </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress2</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress3</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress4</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-              <div class="sticker sticker-sale"></div>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress5</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-            </div>
-          </div>
-          <div>
-            <div class="product-item">
-              <div class="pi-img-wrapper">
-                <img src="<?php echo base_url() ?>assetss/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
-                <div>
-                  <a href="<?php echo base_url() ?>assetss/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                </div>
-              </div>
-              <h3><a href="shop-item.html">Berry Lace Dress6</a></h3>
-              <div class="pi-price">$29.00</div>
-              <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-            </div>
-          </div>
+
+          <?php }
+          ?>
+
+
         </div>
       </div>
       <!-- END CONTENT -->
@@ -537,46 +323,8 @@
       <div class="sidebar col-md-3 col-sm-4">
         <h2>Category Product Info</h2>
         <ul class="list-group margin-bottom-25 sidebar-menu">
-          <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Ladies</a></li>
-          <li class="list-group-item clearfix dropdown">
-            <a href="shop-product-list.html">
-              <i class="fa fa-angle-right"></i>
-              Mens
-
-            </a>
-            <ul class="dropdown-menu">
-              <li class="list-group-item dropdown clearfix">
-                <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Shoes </a>
-                <ul class="dropdown-menu">
-                  <li class="list-group-item dropdown clearfix">
-                    <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic 1</a></li>
-                      <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic 2</a></li>
-                    </ul>
-                  </li>
-                  <li class="list-group-item dropdown clearfix">
-                    <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport 1</a></li>
-                      <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport 2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Trainers</a></li>
-              <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Jeans</a></li>
-              <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Chinos</a></li>
-              <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> T-Shirts</a></li>
-            </ul>
-          </li>
-          <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Kids</a></li>
-          <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Accessories</a></li>
-          <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sports</a></li>
-          <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Brands</a></li>
-          <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Electronics</a></li>
-          <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Home & Garden</a></li>
-          <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Custom Link</a></li>
+          <span id="kat"></span>
+        
         </ul>
       </div>
       <!-- END SIDEBAR -->
@@ -592,18 +340,7 @@
 <div class="brands">
   <div class="container">
     <div class="owl-carousel owl-carousel6-brands">
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/canon.jpg" alt="canon" title="canon"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/esprit.jpg" alt="esprit" title="esprit"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/gap.jpg" alt="gap" title="gap"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/next.jpg" alt="next" title="next"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/puma.jpg" alt="puma" title="puma"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/zara.jpg" alt="zara" title="zara"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/canon.jpg" alt="canon" title="canon"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/esprit.jpg" alt="esprit" title="esprit"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/gap.jpg" alt="gap" title="gap"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/next.jpg" alt="next" title="next"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/puma.jpg" alt="puma" title="puma"></a>
-      <a href="shop-product-list.html"><img src="<?php echo base_url() ?>assetss/frontend/pages/img/brands/zara.jpg" alt="zara" title="zara"></a>
+<span id="brandlogo"></span> 
     </div>
   </div>
 </div>

@@ -39,4 +39,4 @@
 <!-- DOC: Apply "page-header-menu-fixed" class to set the mega menu fixed  -->
 <!-- DOC: Apply "page-header-top-fixed" class to set the top menu fixed  -->
 
-<body>
+<body onload="StartTimers();" onmousemove="ResetTimers();">

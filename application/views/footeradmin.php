@@ -1,21 +1,40 @@
  <script>
- 	// $(document).ready(function () {
- 	//   // Set timer to check if user is idle
- 	//   var idleTimer;
- 	//   $(this).mousemove(function(e){
- 	//     // clear prior timeout, if any
- 	//     window.clearTimeout(idleTimer);
+ 	// Set timeout variables.
+ 	var timoutWarning = 3300000; // Display warning in 14 Mins.
+ 	var timoutNow = 3600000; // Timeout in 15 mins.
+ 	var logoutUrl = '<?php echo base_url() ?>auth/logout'; // URL to logout page.
 
- 	//     // create new timeout (3 mins)
- 	//     idleTimer = window.setTimeout(isIdle, 102000);
- 	//   });
+ 	var warningTimer;
+ 	var timeoutTimer;
 
- 	//   function isIdle() {
- 	//     alert("3 mins have passed without moving the mouse.");
- 	//   }
- 	// });
+ 	// Start timers.
+ 	function StartTimers() {
+ 		// warningTimer = setTimeout("IdleWarning()", timoutWarning);
+ 		timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+ 	}
 
+ 	// Reset timers.
+ 	function ResetTimers() {
+ 		clearTimeout(warningTimer);
+ 		clearTimeout(timeoutTimer);
+ 		StartTimers();
+ 		$("#timeout").dialog('close');
+ 	}
 
+ 	// Show idle timeout warning dialog.
+ 	function IdleWarning() {
+ 		// $("#timeout").dialog({
+ 		// 	modal: true
+ 		// });
+ 		alert("no action");
+ 	}
+
+ 	// Logout the user.
+ 	function IdleTimeout() {
+ 		window.location = logoutUrl;
+ 	}
+
+ 	// ResetTimers();
  	jQuery(document).ready(function() {
  		Metronic.init(); // init metronic core components
  		Layout.init(); // init current layout

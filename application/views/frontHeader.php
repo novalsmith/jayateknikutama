@@ -55,6 +55,8 @@ License: You must have a valid license purchased only from themeforest (the abov
   <link href="<?php echo base_url() ?>assetss/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
   <link href="<?php echo base_url() ?>assetss/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css" rel="stylesheet">
   <link href="<?php echo base_url() ?>assetss/global/plugins/slider-layer-slider/css/layerslider.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assetss/global/plugins/slider-layer-slider/skins/fullwidth/skin.css" rel="stylesheet">
+
   <!-- Page level plugin styles END -->
 
   <!-- Theme styles START -->
@@ -65,8 +67,12 @@ License: You must have a valid license purchased only from themeforest (the abov
   <link href="<?php echo base_url() ?>assetss/frontend/layout/css/style-responsive.css" rel="stylesheet">
   <link href="<?php echo base_url() ?>assetss/frontend/layout/css/themes/turquoise.css" rel="stylesheet" id="style-color">
   <link href="<?php echo base_url() ?>assetss/frontend/layout/css/custom.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assetss/frontend/layout/css/custom.css" rel="stylesheet">
   <!-- Theme styles END -->
+  <!-- file:///E:/metronic-master/theme/assets/global/plugins/slider-layer-slider/skins/fullwidth/skin.css -->
   <style>
+ 
+
     .pi-price-habis {
       color: red;
       font: 18px 'PT Sans Narrow', sans-serif;
@@ -258,8 +264,6 @@ License: You must have a valid license purchased only from themeforest (the abov
     .popup-close:hover:before {
       background: #fff;
     }
-
-
   </style>
 </head>
 <!-- Head END -->

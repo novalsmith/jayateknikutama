@@ -15,6 +15,7 @@
 <script type="text/javascript" src="<?php echo base_url() ?>assets/metronic/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/metronic/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 <script src="//cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
+<!-- <script src="<?php echo base_url() ?>assets/js/inactivity.js"></script> -->
 <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
 <!-- <script src="<?php echo base_url() ?>assets/metronic/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script> -->
 <!-- <script src="<?php echo base_url() ?>assets/metronic/assets/admin/pages/scripts/ui-toastr.js"></script> -->
