@@ -34,12 +34,30 @@ class Frontweb extends CI_Controller
             'artikel'  =>    $this->db->query('select * from articles where   status ="1"
                              order by idartikel desc limit 6')->result(),
             'brand'     =>   $this->db->query('select * from brand   order by idbrand desc')->result()
-           
-
-
+            
         );
 
         $this->load->view('frontTemplate', $data);
+    }
+
+
+    public function ProductDetil()
+    {
+        $data = array(
+
+            'content'     => 'frontproductDetail',
+            'brand'     =>   $this->db->query('select * from brand   order by idbrand desc')->result()
+           );
+
+        $this->load->view('frontTemplate', $data);
+    }
+
+    public function ProductDetilByid($id)
+    {
+         $data = $this->db->query('select * from products p 
+         join kategorimenu k on p.idmenu = k.idmenu
+         WHERE p.idmenu = '.$id.'  ')->result();
+         echo json_encode($data);
     }
 
     public function jsonproduk()

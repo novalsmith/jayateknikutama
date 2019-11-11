@@ -71,8 +71,6 @@ License: You must have a valid license purchased only from themeforest (the abov
   <!-- Theme styles END -->
   <!-- file:///E:/metronic-master/theme/assets/global/plugins/slider-layer-slider/skins/fullwidth/skin.css -->
   <style>
- 
-
     .pi-price-habis {
       color: red;
       font: 18px 'PT Sans Narrow', sans-serif;
@@ -271,3 +269,204 @@ License: You must have a valid license purchased only from themeforest (the abov
 <!-- Body BEGIN -->
 
 <body class="ecommerce">
+
+
+  <div class="container">
+    <div class="popup" pd-popup="popupNew">
+      <div class="popup-inner">
+        <h1>Brand</h1>
+
+        <span id="brandmenu"></span>
+
+        <!-- <p><a pd-popup-close="popupNew" href="#" class="btn btn-danger">Close</a></p> -->
+        <a class="popup-close" pd-popup-close="popupNew" href="#"> </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- all modal -->
+
+  <!-- all modal contact-->
+  <div class="container">
+    <div class="popup" pd-popup="popupContact">
+      <div class="popup-inner">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <h2>Contact Us</h2>
+            <address class="margin-bottom-40" id="contactmenu">
+
+            </address>
+
+
+          </div>
+
+        </div>
+
+
+        <!-- <p><a pd-popup-close="popupContact" href="#" class="btn btn-danger">Close</a></p> -->
+        <a class="popup-close" pd-popup-close="popupContact" href="#"> </a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="popup" pd-popup="popupAbout">
+      <div class="popup-inner">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <h2>About Us</h2>
+            <address class="margin-bottom-40" id="aboutmenu">
+
+            </address>
+
+
+          </div>
+
+        </div>
+
+
+        <!-- <p><a pd-popup-close="popupContact" href="#" class="btn btn-danger">Close</a></p> -->
+        <a class="popup-close" pd-popup-close="popupAbout" href="#"> </a>
+      </div>
+    </div>
+  </div>
+  <!-- all modalcontact-->
+
+
+
+
+
+  <!-- BEGIN TOP BAR -->
+  <div class="pre-header">
+    <div class="container">
+      <div class="row">
+        <!-- BEGIN TOP BAR LEFT PART -->
+        <div class="col-md-6 col-sm-6 additional-shop-info">
+          <ul class="list-unstyled list-inline">
+            <li><i class="fa fa-phone"></i><span id="tlp1jtm"></span></li>
+            <li><i class="fa fa-book"></i><span id="emailjtm"></span></li>
+            <!-- BEGIN CURRENCIES -->
+
+            <!-- END CURRENCIES -->
+            <!-- BEGIN LANGS -->
+
+            <!-- END LANGS -->
+          </ul>
+        </div>
+        <!-- END TOP BAR LEFT PART -->
+        <!-- BEGIN TOP BAR MENU -->
+        <div class="col-md-6 col-sm-6 additional-nav">
+          <ul class="list-unstyled list-inline pull-right">
+
+            <li><a href="page-login.html">Log In</a></li>
+          </ul>
+        </div>
+        <!-- END TOP BAR MENU -->
+      </div>
+    </div>
+  </div>
+  <!-- END TOP BAR -->
+
+  <!-- BEGIN HEADER -->
+  <div class="header">
+    <div class="container">
+      <a class="site-logo" href="<?php echo base_url('frontweb') ?>">
+        <img src="<?php echo base_url() ?>assetss/jutlogo.png" alt="Metronic Shop UI">
+        <!-- <h1 style="font-weight: bold;">JAYA UTAMA TEKNIK</h1> -->
+      </a>
+      <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+      <div class="header-navigation">
+        <ul>
+          <li class="dropdown dropdown-megamenu">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+              ALL Category <i class="fa fa-bars"></i>
+
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <?php
+                function has_children($rows, $id)
+                {
+                  foreach ($rows as $row) {
+                    if ($row['parentid'] == $id) { // untuk dapat sub menu 
+                      return true;
+                    }
+                  }
+                  return false;
+                }
+                function build_menu($rows, $parent = 0)
+                {
+
+
+                  $result = "<ul>";
+                  foreach ($rows as $row) {
+                    if ($row['parentid'] == $parent) {
+                      $result .= "<li class='dropdown-submenu'> <a href=' " .base_url('frontweb/ProductDetil/'). $row['idmenu'].'/'.$row['slugmenu'] . " '> {$row['menu']}</a>";
+                      if (has_children($rows, $row['idmenu'])) { // pengecekan sub menu
+                        $result .= " <i  class='fa fa-angle-right'></i> <ul class='dropdown-menu' role='menu'> " . build_menu($rows, $row['idmenu']) . "</ul>";
+                      }
+                      $result .= "</li>";
+                    }
+                  }
+                  $result .= "</ul>";
+                  return $result;
+                }
+
+                $rows = $this->db->query('select * from kategorimenu')->result_array();
+                echo build_menu($rows, 0);
+
+                ?>
+
+
+                <ul>
+
+                </ul>
+
+
+              </li>
+            </ul>
+
+          </li>
+        </ul>
+      </div>
+
+
+
+      <!-- <a href="javascript:void(0);" class="top-cart-info-value">Info Terbaru</a> -->
+
+
+      <!-- BEGIN NAVIGATION -->
+      <div class="header-navigation pull-right">
+        <ul>
+
+          <li><a href="#" href="#" target="_blank">Home</a></li>
+          <li><a href="onepage-index.html" pd-popup-open="popupAbout" target="_blank">About</a></li>
+          <li><a href="onepage-index.html" target="_blank">Produk</a></li>
+          <li><a href="#" pd-popup-open="popupNew" target="_blank">Brand</a></li>
+          <li><a href="onepage-index.html" target="_blank">Artikel</a></li>
+          <li><a href="#" pd-popup-open="popupContact" target="_blank">Contact</a></li>
+
+
+
+          <!-- BEGIN TOP SEARCH -->
+          <li class="menu-search">
+            <span class="sep"></span>
+            <i class="fa fa-search search-btn"></i>
+            <div class="search-box">
+              <form action="#">
+                <div class="input-group">
+                  <input type="text" placeholder="Search" class="form-control">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </li>
+          <!-- END TOP SEARCH -->
+        </ul>
+      </div>
+      <!-- END NAVIGATION -->
+    </div>
+  </div>
+  <!-- Header END -->
