@@ -41,6 +41,41 @@ class Frontweb extends CI_Controller
     }
 
 
+    public function Product()
+    {
+        $data = array(
+
+            'content'     => 'frontproductAll',
+            'brand'     =>   $this->db->query('select * from brand   order by idbrand desc')->result()
+           );
+
+        $this->load->view('frontTemplate', $data);
+    }
+
+    public function Productshow()
+    {
+        $data = array(
+
+            'content'     => 'frontprodukShow',
+            'brand'     =>   $this->db->query('select * from brand   order by idbrand desc')->result() 
+          
+           );
+
+        $this->load->view('frontTemplate', $data);
+    }
+
+    public function ProductshowGet($slug)
+    {
+  
+ 
+          $data = $this->db->query('select  * from products a
+                                join kategorimenu km on a.idmenu = km.idmenu  where a.slug="'.$slug.'"  ')->result();
+         
+            echo json_encode($data);
+         
+ 
+    }
+
     public function ProductDetil()
     {
         $data = array(
@@ -52,11 +87,33 @@ class Frontweb extends CI_Controller
         $this->load->view('frontTemplate', $data);
     }
 
+    public function ProductDetilAll()
+    {
+        
+            $data = $this->db->query('select * from products p 
+            join kategorimenu k on p.idmenu = k.idmenu where slideshow !=1 ')->result();
+      
+         echo json_encode($data);
+    }
+
+    public function ProductKategori()
+    {
+        
+            // $data = $this->db->query('select * from  kategorimenu where status = 1 ')->result();
+            $data = $this->db->query('select count(a.idmenu) as total,km.menu,a.idmenu,km.slugmenu from products a
+         join kategorimenu km on a.idmenu = km.idmenu where a.status =1 group by a.idmenu ')->result();
+      
+         echo json_encode($data);
+    }
+
     public function ProductDetilByid($id)
     {
-         $data = $this->db->query('select * from products p 
-         join kategorimenu k on p.idmenu = k.idmenu
-         WHERE p.idmenu = '.$id.'  ')->result();
+      
+            $data = $this->db->query('select * from products p 
+            join kategorimenu k on p.idmenu = k.idmenu
+            WHERE p.idmenu = '.$id.'  ')->result();
+       
+        
          echo json_encode($data);
     }
 

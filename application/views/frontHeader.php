@@ -357,7 +357,7 @@ License: You must have a valid license purchased only from themeforest (the abov
         <div class="col-md-6 col-sm-6 additional-nav">
           <ul class="list-unstyled list-inline pull-right">
 
-            <li><a href="page-login.html">Log In</a></li>
+            <li><a href="<?php echo base_url().'auth' ?>">Log In</a></li>
           </ul>
         </div>
         <!-- END TOP BAR MENU -->
@@ -439,9 +439,9 @@ License: You must have a valid license purchased only from themeforest (the abov
       <div class="header-navigation pull-right">
         <ul>
 
-          <li><a href="#" href="#" target="_blank">Home</a></li>
-          <li><a href="onepage-index.html" pd-popup-open="popupAbout" target="_blank">About</a></li>
-          <li><a href="onepage-index.html" target="_blank">Produk</a></li>
+          <li><a href="<?php echo base_url().'frontweb' ?>">Home</a></li>
+          <li><a href="javascript:void(0)" pd-popup-open="popupAbout" target="_blank">About</a></li>
+          <li><a href="<?php echo base_url().'frontweb/Product' ?>" >Produk</a></li>
           <li><a href="#" pd-popup-open="popupNew" target="_blank">Brand</a></li>
           <li><a href="onepage-index.html" target="_blank">Artikel</a></li>
           <li><a href="#" pd-popup-open="popupContact" target="_blank">Contact</a></li>

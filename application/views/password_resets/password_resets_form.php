@@ -24,7 +24,7 @@
             <label for="timestamp">Created At <?php echo form_error('created_at') ?></label>
             <input type="text" class="form-control" name="created_at" id="created_at" placeholder="Created At" value="<?php echo $created_at; ?>" />
         </div>
-	    <input type="hidden" name="" value="<?php echo $; ?>" /> 
+	    <input type="hidden" name="" value="" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('password_resets') ?>" class="btn btn-default">Cancel</a>
 	</form>

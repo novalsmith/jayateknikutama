@@ -36,14 +36,14 @@
             <div>
               <div class="product-item">
                 <div class="pi-img-wrapper">
-                  <img src="<?php echo base_url() . 'assets/img/produk/' . $key->image ?>" class="img-responsive" alt="Berry Lace Dress">
+                  <img src="<?php echo base_url() . 'assets/img/produk/' . $key->image ?>" class="img-responsive" alt="<?php echo $key->name ?>">
                   <div>
                     <a href="<?php echo base_url() . 'assets/img/produk/' . $key->image ?>" class="btn btn-default fancybox-button">Zoom</a>
-                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                    <!-- <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a> -->
                   </div>
                 </div>
-                <h3><a href="<?php echo base_url() . $key->id . '/' . $key->slug ?>"> <?php echo $key->name ?> </a></h3>
-
+                <h3><a href="<?php echo base_url('frontweb/Productshow/') . $key->id . '/' . $key->slug ?>"> <?php echo $key->name ?> </a></h3>
+               
               </div>
             </div>
 
@@ -80,7 +80,7 @@
                   <img src="<?php echo base_url() . 'assets/img/small/' . $key->image ?>" class="img-responsive" alt="Berry Lace Dress">
                   <div>
                     <a href="<?php echo base_url() . 'assets/img/small/' . $key->image ?>" class="btn btn-default fancybox-button">Zoom</a>
-                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                    <!-- <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a> -->
                   </div>
                 </div>
                 <h3><a href="<?php echo base_url() . $key->idartikel . '/' . $key->slug ?>"> <?php echo $key->title ?> </a></h3>
