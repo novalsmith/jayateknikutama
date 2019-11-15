@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+  ob_start();
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -23,8 +23,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+// $config['base_url'] = 'https://member.mosframtech.com/';
 $config['base_url'] = 'http://localhost/App/jayateknikutama/';
-
 /*
 |--------------------------------------------------------------------------
 | Index File

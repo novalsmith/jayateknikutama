@@ -254,7 +254,7 @@ class Products extends CI_Controller
   {
     $config['upload_path']          = './assets/img/produk';
     $config['allowed_types']        = 'gif|jpg|png';
-    $config['file_name']            = 'haditerpal_' . date('dMy H i s');
+    $config['file_name']            = 'jayateknikutama_' . date('dMy H i s');
     $config['overwrite']            = true;
     // $config['max_size']             = 1024; // 1MB
     // $config['max_width']            = 1024;

@@ -1,5 +1,5 @@
 <!-- BEGIN BRANDS -->
-<div class="brands">
+<!-- <div class="brands">
 	<div class="container">
 		<div class="owl-carousel owl-carousel6-brands">
 
@@ -16,8 +16,35 @@
 
 		</div>
 	</div>
-</div>
+</div> -->
 <!-- END BRANDS -->
+
+
+<div class="container">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLongTitle">Hasil Pencarian</h1>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+          <!-- <span aria-hidden="true">&times;</span> -->
+        </button>
+      </div>
+      <div class="modal-body">
+         
+		<div class="container">
+		<div id="hasilpencarian"></div>		
+		</div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="tutup()" >Close</button>
+     
+      </div>
+    </div>
+  </div>
+</div></div>
 
 <!-- BEGIN STEPS -->
 <div class="steps-block steps-block-red">
@@ -62,13 +89,13 @@
 			</div>
 			<!-- END BOTTOM ABOUT BLOCK -->
 			<!-- BEGIN BOTTOM INFO BLOCK -->
-			<div class="col-md-3 col-sm-6 pre-footer-col">
+			<!-- <div class="col-md-3 col-sm-6 pre-footer-col">
 				<h2>BRANDS</h2>
 				<ul class="list-unstyled">
 					<span id="brandlist"></span>
 
 				</ul>
-			</div>
+			</div> -->
 			<!-- END INFO BLOCK -->
 
 			<!-- BEGIN TWITTER BLOCK -->
@@ -167,37 +194,51 @@
 <script src="<?php echo base_url() ?>assetss/frontend/layout/scripts/layout.js" type="text/javascript"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-
 		var id = '<?php echo $this->uri->segment(3) ?>';
 		var id2 = '<?php echo $this->uri->segment(2) ?>';
-		var menuUrl = '<?php echo $this->uri->segment(4) ?>'; 
 
-		var url ="";
-		if(id2=="Productshow"){
-			url =  "<?php echo site_url('frontweb/ProductshowGet/') ?>" + menuUrl;
-		}else{
-			url =  "<?php echo site_url('frontweb/ProductDetilByid/') ?>" + id;
-			
-		}
+		var menuUrl = '<?php echo $this->uri->segment(4) ?>';
+		const monthNames = ["January", "February", "March", "April", "May", "June",
+			"July", "August", "September", "October", "November", "December"
+		];
 
-		$.ajax({
-			url: url,
 
-			type: "GET",
-			dataType: "JSON",
-			success: function(data) {
-				console.log(data);
-				if (data.length < 1) {
-					$('#juduldetail').text(menuUrl);
-					$('#ketkategori').text('Produk Item tidak ditemukan');
-					$('#produkisi').append("<h2>Produk Item tidak ditemukan</h2>");
 
-				} else {
-					$('#juduldetail').text(data[0].menu);
-					$('#ketkategori').text(data.length + ' Produk Item kategori ditemukan');
+		var url = "";
+		if (id2 == "Productshow") {
+			url = "<?php echo site_url('frontweb/ProductshowGet/') ?>" + menuUrl;
+			$.ajax({
+				url: url,
+				type: "GET",
+				dataType: "JSON",
+				success: function(data) {
+					console.log(data);
+					var res = data[0].tags.split(",");
+					console.log(res);
+					$.each(res, function(i, data) {
 
-					$.each(data, function(key, value) {
-						var isi = `
+						$('#tagsviewskategori').append(` 
+                 
+                          
+                                       
+                                            <a href="javascript:;" style="color:white">
+                                            <i class="fa fa-tags"></i> ` + data + ` </a>
+                                      
+                        `);
+					});
+
+					if (data.length < 1) {
+						$('#juduldetail').text(data[0].name);
+						$('#ketkategori').text('Produk Item tidak ditemukan');
+						$('#produkisi').append("<h2>Produk Item tidak ditemukan</h2>");
+					} else {
+						const setdate = new Date(data[0].create_date);
+
+						$('#juduldetail').text(data[0].name);
+						$('#ketkategori').append("Posted :" + setdate.getDate() + " " + monthNames[setdate.getMonth()] + " " + setdate.getFullYear() + " #" + data[0].menu + " ");
+						$('#isicontentproduk').append(data[0].description);
+						$.each(data, function(key, value) {
+							var isi = `
 						 <div class="col-md-4 col-sm-6 col-xs-12">
 						<div class="product-item">
 						<div class="pi-img-wrapper">
@@ -207,120 +248,234 @@
 						 
 							</div>
 						</div>
-						<h3><a href="shop-item.html">` + value.name + `</a></h3>
+						<h3><a href="javascript:void(0)">` + value.name + `</a></h3>
   
 				
 						</div>
 					</div> `;
-						$('#produkisi').append(isi);
+							$('#produkisi').append(isi);
+						});
+					}
+				}
+			});
+		} 
+		
+		else if(id2 == "artikeldetail"){
+
+			url = "<?php echo site_url('frontweb/ArtikelAllwhere/') ?>" + id;
+			$.ajax({
+				url: url,
+				type: "GET",
+				dataType: "JSON",
+				success: function(data) {
+					console.log(data);
+					var res = data[0].tags.split(",");
+					console.log(res);
+					$.each(res, function(i, data) {
+
+						$('#tagsviewskategori').append(` 
+                 
+                           
+                                            <a href="javascript:;" style="color:white">
+                                            <i class="fa fa-tags"></i> ` + data + ` </a>
+                                      
+                        `);
 					});
 
+					if (data.length < 1) {
+						$('#juduldetail').text(data[0].name);
+						$('#ketkategori').text('Produk Item tidak ditemukan');
+						$('#produkisi').append("<h2>Produk Item tidak ditemukan</h2>");
+					} else {
+						const setdate = new Date(data[0].create_date);
 
+						$('#juduldetail').text(data[0].title);
+						$('#ketkategori').append("Posted :" + setdate.getDate() + " " + monthNames[setdate.getMonth()] + " " + setdate.getFullYear() + " #" + data[0].menu + " ");
+						$('#isicontentproduk').append(data[0].description);
+					 
+							var isi = `
+						 <div class="col-md-12">
+					  <img src="<?php echo base_url() ?>assets/img/small/` + data[0].image + `
+					   " class="img-responsive col-md-8" alt="` + data[0].name + `">
+							</div>
+							<div class="col-md-12">
+						<p>` + data[0].body + `</p>
+   						</div> `;
+							$('#produkisi').append(isi);
+				 
+					}
 				}
-			}
-		});
+			});
 
-var base = "<?php echo site_url('frontweb/ProductDetil/') ?>";
- 
+
+
+
+		}
+		else {
+			url = "<?php echo site_url('frontweb/ProductDetilByid/') ?>" + id;
+			$.ajax({
+				url: url,
+				type: "GET",
+				dataType: "JSON",
+				success: function(data) {
+					console.log(data);
+					if (data.length < 1) {
+						$('#juduldetail').text(menuUrl);
+						$('#ketkategori').text('Produk Item tidak ditemukan');
+						$('#produkisi').append("<h2>Produk Item tidak ditemukan</h2>");
+					} else {
+						$('#juduldetail').text(data[0].menu);
+						$('#ketkategori').text(data.length + ' Produk Item kategori ditemukan');
+						$.each(data, function(key, value) {
+							var isi = `
+						 <div class="col-md-4 col-sm-6 col-xs-12">
+						<div class="product-item">
+						<div class="pi-img-wrapper">
+							<img src="<?php echo base_url() ?>assets/img/produk/` + value.image + ` " class="img-responsive" alt="` + value.name + `">
+							<div>
+							<a href="<?php echo base_url() ?>assets/img/produk/` + value.image + ` " class="btn btn-default fancybox-button">Zoom</a>
+						 
+							</div>
+						</div>
+					 <h3><a href="<?php echo base_url() . 'frontweb/Productshow/' ?>` + value.id + "/" + value.slug + ` ">` + value.name + `</a></h3> 
+
+				
+						</div>
+					</div> `;
+							$('#produkisi').append(isi);
+						});
+					}
+				}
+			});
+		}
+
+		var base = "<?php echo site_url('frontweb/ProductDetil/') ?>";
+
 		$.ajax({
 			url: "<?php echo site_url('frontweb/ProductKategori') ?>",
-			
+
 			type: "GET",
 			dataType: "JSON",
 			success: function(data) {
 				// console.log(data);
 				var isi = ``;
-					$.each(data, function(key, value) {
+				$.each(data, function(key, value) {
+					if (id == value.idmenu) {
+						isi += `<li class="list-group-item clearfix active"><a href="` + base + value.idmenu + '/' + value.slugmenu + `">
+									<i class="fa fa-angle-right"></i> ` + value.menu + `   <p class="badge badge-info"> ` + value.total + ` </p>        </a></li>`;
+					} else {
+						isi += `<li class="list-group-item clearfix"><a href="` + base + value.idmenu + '/' + value.slugmenu + `">
+									<i class="fa fa-angle-right"></i> ` + value.menu + `      <p class="badge badge-info"> ` + value.total + ` </p>       </a></li>`;
+					}
 
-						if(id == value.idmenu ){
-							isi += `<li class="list-group-item clearfix active"><a href="`+base+value.idmenu+'/'+value.slugmenu + `">
-									<i class="fa fa-angle-right"></i> `+value.menu+`   <p class="badge badge-info"> ` + value.total + ` </p>        </a></li>`;
-						}else{
-							isi += `<li class="list-group-item clearfix"><a href="`+base+value.idmenu+'/'+value.slugmenu + `">
-									<i class="fa fa-angle-right"></i> `+value.menu+`      <p class="badge badge-info"> ` + value.total + ` </p>       </a></li>`;
-						}
 
-						 
-						 
-						
-					});
-					$('#listkategori').append(isi);
 
-				 
+				});
+				$('#listkategori').append(isi);
+
 			}
 		});
 
 		$.ajax({
 			url: "<?php echo site_url('frontweb/ProductDetilAll') ?>",
-
 			type: "GET",
 			dataType: "JSON",
 			success: function(data) {
 				// console.log(data);
-			 
-					$('#juduldetailproduk').text(data[0].menu);
-					$('#ketkategoriproduk').text(data.length + ' Produk Item kategori ditemukan');
-					var	isi = '';
-					
-					$.each(data, function(key, value) {
-					 
-					 	isi +='  <div class="col-md-5">'+
-						'<div class="product-item">'+
-						'<div class="pi-img-wrapper">'+
-							'<img src="<?php echo base_url() ?>assets/img/produk/' + value.image + ' " class="img-responsive" alt="' + value.name + '">'+
-							'<div>'+
-							'<a href="<?php echo base_url() ?>assets/img/produk/' + value.image + ' " class="btn btn-default fancybox-button">Zoom</a>'+
-						 
-							'</div>'+
-						'</div>'+
-						'<h3><a href="shop-item.html">' + value.name + '</a></h3>'+
-						
-				
+
+				$('#juduldetailproduk').text(data[0].menu);
+				$('#ketkategoriproduk').text(data.length + ' Produk Item kategori ditemukan');
+				var isi = '';
+
+				$.each(data, function(key, value) {
+
+					isi += '  <div class="col-md-5">' +
+						'<div class="product-item">' +
+						'<div class="pi-img-wrapper">' +
+						'<img src="<?php echo base_url() ?>assets/img/produk/' + value.image + ' " class="img-responsive" alt="' + value.name + '">' +
+						'<div>' +
+						'<a href="<?php echo base_url() ?>assets/img/produk/' + value.image + ' " class="btn btn-default fancybox-button">Zoom</a>' +
+
+						'</div>' +
+						'</div>' +
+						'<h3><a href="<?php echo base_url() . 'frontweb/Productshow/' ?>' + value.id + "/" + value.slug + ' ">' + value.name + '</a></h3>' +
+
+
 						'</div></div>  ';
 
-				  
 					$('#produkisiAll').html(isi);
-					
-					});
-				
 
-			 
+				});
+
+
 			}
 		});
+
+
+
+		// artikel
+
+		$.ajax({
+			url: "<?php echo site_url('frontweb/ArtikelAll') ?>",
+			type: "GET",
+			dataType: "JSON",
+			success: function(data) {
+				// console.log(data);
+
+				$('#juduldetailproduk').text(data[0].menu);
+				$('#ketkategoriproduk').text(data.length + ' Produk Item kategori ditemukan');
+				var isi = '';
+
+				$.each(data, function(key, value) {
+
+					isi += '  <div class="col-md-5">' +
+						'<div class="product-item">' +
+						'<div class="pi-img-wrapper">' +
+						'<img src="<?php echo base_url() ?>assets/img/small/' + value.image + ' " class="img-responsive" alt="' + value.title + '">' +
+						'<div>' +
+						'<a href="<?php echo base_url() ?>assets/img/small/' + value.image + ' " class="btn btn-default fancybox-button">Zoom</a>' +
+
+						'</div>' +
+						'</div>' +
+						'<h3><a href="<?php echo base_url() . 'frontweb/artikeldetail/' ?>' + value.idartikel + "/" + value.slug + ' ">' + value.title + '</a></h3>' +
+
+
+						'</div></div>  ';
+
+					$('#artikelAll').html(isi);
+
+				});
+
+
+			}
+		});
+
+		// end artikel
+
 
 		$.ajax({
 			url: "<?php echo base_url('frontweb/jsonproduk_brand') ?>",
 			type: "GET",
 			dataType: "JSON",
 			success: function(data) {
-
-
 				$.each(data, function(key, value) {
-
 					$('#brandlist').append(`  <li><i class="fa fa-angle-right"></i> <a href="` + value.idbrand + "/" + value.judul + `">` + value.judul + `</a></li>`);
-
-
 					$('#brandmenu').append(` 
 						      <a class="col-md-3" href="shop-product-list.html">
 							  <img class="col-md-12 img-responsive" src="<?php echo base_url() ?>assets/img/brand/` + value.filebrand + ` 
 							   " alt="` + value.judul + `" title="` + value.judul + `"></a>
-
 						`);
-
 				});
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				alert('Error get data from ajax');
 			}
 		});
-
 		$.ajax({
 			url: "<?php echo site_url('frontweb/jsonproduk_All') ?>",
 			type: "GET",
 			dataType: "JSON",
-
 			success: function(data) {
-
 				$.each(data.kategori, function(key, val) {
 					// console.log(val);
 					// if (val.total == 2) {
@@ -328,111 +483,22 @@ var base = "<?php echo site_url('frontweb/ProductDetil/') ?>";
 					// }
 					var kategori = `
 						  <li class="list-group-item clearfix">
-            <a href="` + val.slugmenu + `">
+            <a href="javascript:void(0)">
 			  <i class="fa fa-angle-right"></i> ` + val.menu + `    <p class="badge badge-info"> ` + val.total + ` </p> </a>
  			 </li> `;
-
 					$('#kat').append(kategori);
-
 				});
-
 				$('#tlp1').text(data.webprofil[0].tlp1);
 				$('#tlp1jtm').text(data.webprofil[0].tlp1);
 				$('#emailjtm').text(data.webprofil[0].email);
 				$('#aboutus').html(data.about[0].keterangan);
 				$('#contactjtm').html(data.contact[0].keterangan);
-				$('#contactmenu').html(data.contact[0].keterangan);
-				$('#aboutmenu').html(data.about[0].keterangan);
+				$('#contactisi').html(data.contact[0].keterangan);
+				$('#aboutisi').html(data.about[0].keterangan);
 				$('#profiljtm').text(data.webprofil[0].profil);
 				$('#nameweb').html(data.webprofil[0].namaweb);
-
-
-
-
 			}
 		});
-
-
-
-		$("#loading").html("<h1>Loading...</h1>");
-		$.ajax({
-			url: "<?php echo site_url('frontweb/jsonproduk') ?>",
-			type: "GET",
-			dataType: "JSON",
-
-			success: function(data) {
-				$("#loading").html("");
-				// console.log(data.data[0].name);
-				var temp = data.data;
-				var tmp = ``;
-				if (data.total <= 1) {
-					tmp += ` 
-      <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
-      <img src="<?php echo base_url() ?>assets/img/produk/` + data.data[0].image + `  " class="ls-bg" alt="Slide background">
-      <div class="ls-l ls-title" style=" display: inline-block;  
-    width: 500px; padding:0px;     font-weight: 400;
-     top:50%; left:70%;    line-height: 55px; 
-    text-align: center;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationin: 750; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          rotatein: 90; 
-          rotateout: -90; 
-          scalein: .5; 
-          scaleout: .5; 
-          ">
-        <a style="    text-shadow: 2px 2px 4px #444444; color: black;
-  -webkit-text-fill-color: white ; 
-  -webkit-text-stroke-width: 1px;
-  " href="">` + data.data[0].name + `</a>
-      </div>
-  </div>
-         `;
-					$('#slidershowpage').html(tmp);
-				} else {
-
-					$.each(temp, function(key, value) {
-						// console.log(value.image);
-						tmp += ` 
-                                     <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
-
-      <img src="<?php echo base_url() ?>assets/img/produk/` + value.image + `  " class="ls-bg" alt="Slide background">
-
-      <div class="ls-l ls-title" style=" display: inline-block;  
-    width: 500px; padding:0px;     font-weight: 400;
-     top:50%; left:70%;    line-height: 55px; 
-    text-align: center;" data-ls="
-          fade: true; 
-          fadeout: true; 
-          durationin: 750; 
-          durationout: 750; 
-          easingin: easeOutQuint; 
-          rotatein: 90; 
-          rotateout: -90; 
-          scalein: .5; 
-		  scaleout: .5; 
-		   showuntil: 4000;
-          ">
-        <a style="    text-shadow: 2px 2px 4px #444444; color: black;
-  -webkit-text-fill-color: white ; 
-  -webkit-text-stroke-width: 1px;
-  " href="">` + value.name + `</a>
-      </div>
-  </div>
-		 `;
-						$('#slidershowpage').html(tmp);
-					});
-				}
-
-
-
-
-			}
-		});
-
-
 
 		Layout.init();
 		Layout.initOWL();
@@ -441,24 +507,82 @@ var base = "<?php echo site_url('frontweb/ProductDetil/') ?>";
 		Layout.initTouchspin();
 		Layout.initTwitter();
 	});
-
 	$(function() {
 		//----- OPEN
 		$('[pd-popup-open]').on('click', function(e) {
 			var targeted_popup_class = jQuery(this).attr('pd-popup-open');
 			$('[pd-popup="' + targeted_popup_class + '"]').fadeIn(200);
-
 			e.preventDefault();
 		});
-
 		//----- CLOSE
 		$('[pd-popup-close]').on('click', function(e) {
 			var targeted_popup_class = jQuery(this).attr('pd-popup-close');
 			$('[pd-popup="' + targeted_popup_class + '"]').fadeOut(200);
-
 			e.preventDefault();
 		});
 	});
+
+	$("#pencarian").submit(function(event){
+  event.preventDefault();
+  $('#hasilpencarian').append("");
+  var val =	$('#cari').val();
+  if(val == ""){
+	$('#seterror').text('Masih Kosong');
+	setTimeout(function(){ 	$('#seterror').text(''); }, 1100);
+ 
+  }else{
+	
+
+	$.ajax({
+			url: "<?php echo site_url('frontweb/ResultSearching/') ?>"+val,
+			type: "GET",
+			dataType: "JSON",
+			success: function(data) {
+				console.log(data);
+				$.each(data, function(key, val) {
+					// console.log(val);
+					// if (val.total == 2) {
+					// 	console.log(val);
+					// }
+					var kategori = `
+		 
+		 <div class="row" style="margin:15px">
+		 <h1><a href="<?php echo base_url().'frontweb/Productshow/'?>`+val.id+"/"+val.slug+` ">`+val.name+`</a></h1>
+		 <div><p>`+val.description.substring(0, 100);+`..</p></div>
+		 </div>
+		 
+		  `;
+					$('#hasilpencarian').append(kategori);
+				});
+
+
+				// $('#exampleModalCenter').modal('show');
+				$('#exampleModalCenter').modal({
+					backdrop: 'static',
+					keyboard: false,
+					show : true
+				})
+			}
+		});
+
+
+
+
+  }
+  	
+	 
+});
+
+ function tutup(){
+
+
+	$('#exampleModalCenter').modal('hide');
+
+				$('#hasilpencarian').html("");
+	$('#cari').val("");
+ }
+
+
 </script>
 <!-- END PAGE LEVEL JAVASCRIPTS -->
 </body>

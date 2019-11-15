@@ -1,10 +1,4 @@
- 
-        
- 
- 
-
-   
-    <!-- BEGIN PAGE CONTENT INNER -->
+<!-- BEGIN PAGE CONTENT INNER -->
             <div class="row">
                 <div class="col-md-12">
                     <!-- BEGIN EXAMPLE TABLE PORTLET-->

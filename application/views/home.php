@@ -28,8 +28,8 @@
     <!-- BEGIN PAGE CONTENT INNER -->
     <div class="row">
       <div class="col-md-12">
-        <h2>Selamat Datang di PrintMu</h2>
-        <p>Silahkan menggunakan fasilitas di web Printmu.</p>
+        <h2>Selamat Datang di Jaya Teknik Utama</h2>
+        <p>Silahkan menggunakan fasilitas di web Jaya Teknik Utama.</p>
 
 
 

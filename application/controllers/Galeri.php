@@ -186,7 +186,7 @@ public function upload_image(){
     $config['file_name']            = 'jayatknikutama_'.date('dMyHis');
 
     $config['overwrite']            = true;
-    $config['max_size']             = 3000; // 3MB
+ 
  
  
 

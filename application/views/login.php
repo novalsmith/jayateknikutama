@@ -51,7 +51,7 @@
 	<!-- END REGISTRATION FORM -->
 </div>
 <div class="copyright">
-	 <?php echo date('Y'); ?> © HadiTerpal.
+	 <?php echo date('Y'); ?> © Jaya Teknik Utama.
 </div>
  
 </body>
@@ -175,7 +175,7 @@
  
         }
     }else{
-    	 $("#errorEmail").text("Harus email, contoh : haditerpal@gmail.com ");
+    	 $("#errorEmail").text("Harus email, contoh : jayateknikutama@gmail.com ");
     }
 
                 });

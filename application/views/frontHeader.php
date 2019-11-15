@@ -1,48 +1,30 @@
 <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.2.0
-Version: 3.4
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest (the above link) in order to legally use the theme for your project.
--->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
 <html lang="en">
-<!--<![endif]-->
-
-
-
-<!-- Head BEGIN -->
 
 <head>
-  <meta charset="utf-8">
-  <title>Metronic Shop UI</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <title>Jaya Teknik Utama</title>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta content="Metronic Shop UI description" name="description">
-  <meta content="Metronic Shop UI keywords" name="keywords">
-  <meta content="keenthemes" name="author">
+  <meta content="Jaya teknik utama" name="description">
+  <meta content="jaya teknik utama" name="keywords">
+  <meta content="mosframtech.com" name="author">
 
-  <meta property="og:site_name" content="-CUSTOMER VALUE-">
-  <meta property="og:title" content="-CUSTOMER VALUE-">
-  <meta property="og:description" content="-CUSTOMER VALUE-">
+  <meta property="og:site_name" content="Jaya Teknik Utama">
+  <meta property="og:title" content="Jaya teknik utama">
+  <meta property="og:description" content="distributor alat dan mesin">
   <meta property="og:type" content="website">
   <meta property="og:image" content="-CUSTOMER VALUE-"><!-- link to image for socio -->
-  <meta property="og:url" content="-CUSTOMER VALUE-">
+  <meta property="og:url" content="">
 
   <link rel="shortcut icon" href="favicon.ico">
 
   <!-- Fonts START -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
   <!--- fonts for slider on the index page -->
   <!-- Fonts END -->
 
@@ -81,7 +63,6 @@ License: You must have a valid license purchased only from themeforest (the abov
     @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:300,400,400i,500,700');
 
     /* font-family: 'Roboto', sans-serif; font-family: 'Roboto Slab', serif; */
-
     body {
       background: #fff;
       color: #414141;
@@ -357,7 +338,7 @@ License: You must have a valid license purchased only from themeforest (the abov
         <div class="col-md-6 col-sm-6 additional-nav">
           <ul class="list-unstyled list-inline pull-right">
 
-            <li><a href="<?php echo base_url().'auth' ?>">Log In</a></li>
+            <li><a href="<?php echo base_url() . 'auth' ?>">Log In</a></li>
           </ul>
         </div>
         <!-- END TOP BAR MENU -->
@@ -396,12 +377,10 @@ License: You must have a valid license purchased only from themeforest (the abov
                 }
                 function build_menu($rows, $parent = 0)
                 {
-
-
                   $result = "<ul>";
                   foreach ($rows as $row) {
                     if ($row['parentid'] == $parent) {
-                      $result .= "<li class='dropdown-submenu'> <a href=' " .base_url('frontweb/ProductDetil/'). $row['idmenu'].'/'.$row['slugmenu'] . " '> {$row['menu']}</a>";
+                      $result .= "<li class='dropdown-submenu'> <a href=' " . base_url('frontweb/ProductDetil/') . $row['idmenu'] . '/' . $row['slugmenu'] . " '> {$row['menu']}</a>";
                       if (has_children($rows, $row['idmenu'])) { // pengecekan sub menu
                         $result .= " <i  class='fa fa-angle-right'></i> <ul class='dropdown-menu' role='menu'> " . build_menu($rows, $row['idmenu']) . "</ul>";
                       }
@@ -411,10 +390,8 @@ License: You must have a valid license purchased only from themeforest (the abov
                   $result .= "</ul>";
                   return $result;
                 }
-
                 $rows = $this->db->query('select * from kategorimenu')->result_array();
                 echo build_menu($rows, 0);
-
                 ?>
 
 
@@ -439,27 +416,36 @@ License: You must have a valid license purchased only from themeforest (the abov
       <div class="header-navigation pull-right">
         <ul>
 
-          <li><a href="<?php echo base_url().'frontweb' ?>">Home</a></li>
-          <li><a href="javascript:void(0)" pd-popup-open="popupAbout" target="_blank">About</a></li>
-          <li><a href="<?php echo base_url().'frontweb/Product' ?>" >Produk</a></li>
-          <li><a href="#" pd-popup-open="popupNew" target="_blank">Brand</a></li>
-          <li><a href="onepage-index.html" target="_blank">Artikel</a></li>
-          <li><a href="#" pd-popup-open="popupContact" target="_blank">Contact</a></li>
+          <li><a href="<?php echo base_url() . 'frontweb' ?>">Home</a></li>
+          <!-- <li><a href="javascript:void(0)" pd-popup-open="popupAbout" target="_blank">About</a></li> -->
+          <li><a href="<?php echo base_url() . 'frontweb/about' ?>">About</a></li>
+          <li><a href="<?php echo base_url() . 'frontweb/Product' ?>">Produk</a></li>
+          <!-- <li><a href="#" pd-popup-open="popupNew" target="_blank">Brand</a></li> -->
+          <li><a href="<?php echo base_url() . 'frontweb/artikel' ?>" >Artikel</a></li>
+          <li><a href="<?php echo base_url() . 'frontweb/contact' ?>">Contact</a></li>
+          <!-- <li><a href="#" pd-popup-open="popupContact" target="_blank">Contact</a></li> -->
 
-
+ 
 
           <!-- BEGIN TOP SEARCH -->
           <li class="menu-search">
             <span class="sep"></span>
             <i class="fa fa-search search-btn"></i>
             <div class="search-box">
-              <form action="#">
+              <form action="#" method="POST" id="pencarian">
                 <div class="input-group">
-                  <input type="text" placeholder="Search" class="form-control">
+                  <input type="text" width="200" id="cari" name="cari" placeholder="Search" class="form-control">
+                
+                  
                   <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">Search</button>
+                    <button class="btn btn-primary"   type="submit" >Search</button>
                   </span>
                 </div>
+
+                <div class="input-group">
+                <small class="text text-warning" id="seterror"></small>
+                </div>
+
               </form>
             </div>
           </li>
@@ -470,3 +456,5 @@ License: You must have a valid license purchased only from themeforest (the abov
     </div>
   </div>
   <!-- Header END -->
+
+ 

@@ -75,6 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+	// 'hostname' => 'localhost',
+	// 'username' => 'mosx5759_dev',
+	// 'password' => 'novalnauw',
+	// 'database' => 'mosx5759_dev',
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',

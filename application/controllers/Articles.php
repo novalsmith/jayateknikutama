@@ -1,8 +1,6 @@
  <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Articles extends CI_Controller
 {
     function __construct()
@@ -37,8 +35,8 @@ class Articles extends CI_Controller
     }
     
     public function json() {
-        header('Content-Type: application/json');
-        echo $this->Articles_model->json();
+   header('Content-Type: application/json');
+       echo $this->Articles_model->json();
     }
 
 
@@ -165,11 +163,7 @@ public function update_action(){
 );
     unlink('./assets/img/small/'. $foto);
     }
-
-  
-                  
-
-                  $validasi =  $this->Articles_model->update($idarticles, $simpan);
+           $validasi =  $this->Articles_model->update($idarticles, $simpan);
                   if( $validasi){
 
                   echo json_encode(array('judul' => $judul,
@@ -181,11 +175,7 @@ public function update_action(){
                   'status' => FALSE  ));
 
                   }
-
-            
-        
-     
-        
+       
        }
 
 
@@ -193,7 +183,7 @@ private function _uploadImage()
 {
     $config['upload_path']          = './assets/img/small';
     $config['allowed_types']        = 'gif|jpg|png';
-    $config['file_name']            = 'haditerpal_'.date('dMy H i s');
+    $config['file_name']            = 'jayateknikutama_'.date('dMy H i s');
     $config['overwrite']            = true;
     // $config['max_size']             = 1024; // 1MB
     // $config['max_width']            = 1024;
@@ -208,28 +198,6 @@ private function _uploadImage()
       }
      
 }
-
-
-
-
-
-// public function update($id)
-//   {
-//     $row = $this->Articles_model->get_by_id($id);
-
-//     if ($row) {
-//       $data = array(
-
-//         'id_kategori' => $row->idkategori,
-//         'nama_kategori' =>  $row->nama_kategori,
-//         'status' =>  $row->status,
-       
-//       );
-
-//       echo json_encode($data);
-//     }
-//   }
-
 
  
 
@@ -260,8 +228,7 @@ private function _uploadImage()
 
      public function Editget_by_id($id) 
     {
-       
-     
+         
         $row = $this->Articles_model->Editget_by_id($id);
         if ($row) {
           
@@ -282,30 +249,7 @@ private function _uploadImage()
           
     }
     
-  //   public function update_action() 
-  //   {
-  //       $this->_rules();
-
-  //       if ($this->form_validation->run() == FALSE) {
-  //           $this->update($this->input->post('idartikel', TRUE));
-  //       } else {
-  //           $data = array(
-		// 'idkategori' => $this->input->post('idkategori',TRUE),
-		// 'idtag' => $this->input->post('idtag',TRUE),
-		// 'title' => $this->input->post('title',TRUE),
-		// 'slug' => $this->input->post('slug',TRUE),
-		// 'body' => $this->input->post('body',TRUE),
-		// 'image' => $this->input->post('image',TRUE),
-		// 'status' => $this->input->post('status',TRUE),
-		// 'create_date' => $this->input->post('create_date',TRUE),
-		// 'modif_date' => $this->input->post('modif_date',TRUE),
-	 //    );
-
-  //           $this->Articles_model->update($this->input->post('idartikel', TRUE), $data);
-  //           $this->session->set_flashdata('message', 'Update Record Success');
-  //           redirect(site_url('articles'));
-  //       }
-  //   }
+ 
     
     public function delete($id) 
     {
@@ -332,94 +276,9 @@ private function _uploadImage()
         }
     }
 
-    public function _rules() 
-    {
-	$this->form_validation->set_rules('idkategori', 'idkategori', 'trim|required');
-	$this->form_validation->set_rules('idtag', 'idtag', 'trim|required');
-	$this->form_validation->set_rules('title', 'title', 'trim|required');
-	$this->form_validation->set_rules('slug', 'slug', 'trim|required');
-	$this->form_validation->set_rules('body', 'body', 'trim|required');
-	$this->form_validation->set_rules('image', 'image', 'trim|required');
-	$this->form_validation->set_rules('status', 'status', 'trim|required');
-	$this->form_validation->set_rules('create_date', 'create date', 'trim|required');
-	$this->form_validation->set_rules('modif_date', 'modif date', 'trim|required');
-
-	$this->form_validation->set_rules('idartikel', 'idartikel', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-    }
-
-    public function excel()
-    {
-        $this->load->helper('exportexcel');
-        $namaFile = "articles.xls";
-        $judul = "articles";
-        $tablehead = 0;
-        $tablebody = 1;
-        $nourut = 1;
-        //penulisan header
-        header("Pragma: public");
-        header("Expires: 0");
-        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
-        header("Content-Type: application/force-download");
-        header("Content-Type: application/octet-stream");
-        header("Content-Type: application/download");
-        header("Content-Disposition: attachment;filename=" . $namaFile . "");
-        header("Content-Transfer-Encoding: binary ");
-
-        xlsBOF();
-
-        $kolomhead = 0;
-        xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Idkategori");
-	xlsWriteLabel($tablehead, $kolomhead++, "Idtag");
-	xlsWriteLabel($tablehead, $kolomhead++, "Title");
-	xlsWriteLabel($tablehead, $kolomhead++, "Slug");
-	xlsWriteLabel($tablehead, $kolomhead++, "Body");
-	xlsWriteLabel($tablehead, $kolomhead++, "Image");
-	xlsWriteLabel($tablehead, $kolomhead++, "Status");
-	xlsWriteLabel($tablehead, $kolomhead++, "Create Date");
-	xlsWriteLabel($tablehead, $kolomhead++, "Modif Date");
-
-	foreach ($this->Articles_model->get_all() as $data) {
-            $kolombody = 0;
-
-            //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
-            xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->idkategori);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->idtag);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->title);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->slug);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->body);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->image);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->status);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->create_date);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->modif_date);
-
-	    $tablebody++;
-            $nourut++;
-        }
-
-        xlsEOF();
-        exit();
-    }
-
-    public function word()
-    {
-        header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=articles.doc");
-
-        $data = array(
-            'articles_data' => $this->Articles_model->get_all(),
-            'start' => 0
-        );
-        
-        $this->load->view('articles/articles_doc',$data);
-    }
+ 
+ 
 
 }
 
-/* End of file Articles.php */
-/* Location: ./application/controllers/Articles.php */
-/* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2019-05-11 11:09:53 */
-/* http://harviacode.com */
+?>

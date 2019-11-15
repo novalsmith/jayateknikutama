@@ -4,7 +4,7 @@
 <div class="title-wrapper">
   <div class="container">
     <div class="container-inner">
-      <h1 id="juduldetail"></h1>
+      <h1 id="juduldetailet">Contact</h1>
       <em id="ketkategori"></em>
     </div>
   </div>
@@ -13,15 +13,15 @@
 <div class="main">
   <div class="container">
     <ul class="breadcrumb">
-      <li><a href="<?php echo base_url().'frontweb'?>">Home</a></li>
-       
-      <li class="active">Category</li>
+      <li><a href="<?php echo base_url() ?>">Home</a></li>
+      <li><a href="<?php echo base_url('frontweb/product') ?>">Produk</a></li>
+      <li class="active">category</li>
     </ul>
     <!-- BEGIN SIDEBAR & CONTENT -->
     <div class="row margin-bottom-40">
       <!-- BEGIN SIDEBAR -->
       <div class="sidebar col-md-3 col-sm-5">
-      <ul class="list-group margin-bottom-25 sidebar-menu">
+       <ul class="list-group margin-bottom-25 sidebar-menu">
           <span id="listkategori"></span>
           
         
@@ -61,7 +61,7 @@
         <!-- BEGIN PRODUCT LIST -->
         <div class="row product-list">
           <!-- PRODUCT ITEM START -->
-         <div id="produkisi"></div>
+         <div id="contactisi"></div>
       
         </div>
        

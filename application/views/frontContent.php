@@ -7,9 +7,74 @@
   <div id='loading'></div>
   <!-- LayerSlider start -->
   <div id="layerslider" style="width: 100%; height: 494px; margin: 0 auto;">
- 
-    <div id="slidershowpage"></div>
- 
+
+    <!-- <div id="slidershowpage"></div> -->
+
+    <?php
+    $totalrow = $this->db->query('select count(*) as total from products where slideshow =1')->row();
+    $this->db->where('slideshow', 1);
+
+    ?>
+    <?php if ($totalrow->total <= 1) { ?>
+      <?php $data = $this->db->get('products')->row(); ?>
+      <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
+        <img src="<?php echo base_url() ?>assets/img/produk/<?php echo $data->image ?>" class="ls-bg" alt="Slide background">
+        <div class="ls-l ls-title" style=" display: inline-block;  
+    width: 500px; padding:0px;     font-weight: 400;
+     top:50%; left:70%;    line-height: 55px; 
+    text-align: center;" data-ls="
+          fade: true; 
+          fadeout: true; 
+          durationin: 750; 
+          durationout: 750; 
+          easingin: easeOutQuint; 
+          rotatein: 90; 
+          rotateout: -90; 
+          scalein: .5; 
+          scaleout: .5; 
+          ">
+          <a style="text-shadow: 2px 2px 4px #444444; color: black;
+  -webkit-text-fill-color: white ; 
+  -webkit-text-stroke-width: 1px;" href="<?php echo  $data->name ?>"> </a>
+        </div>
+      </div>
+    <?php } else { ?>
+
+
+      <?php
+        $dataloop = $this->db->get('products')->result();
+        foreach ($dataloop as  $data) { ?>
+
+
+
+
+        <div class="ls-slide ls-slide4" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 110,111,112,113;">
+
+          <img src="<?php echo base_url() ?>assets/img/produk/<?php echo $data->image ?>  " class="ls-bg" alt="Slide background">
+
+          <div class="ls-l ls-title" style=" display: inline-block;  
+    width: 500px; padding:0px;     font-weight: 400;
+     top:50%; left:70%;    line-height: 55px; 
+    text-align: center;" data-ls="
+          fade: true; 
+          fadeout: true; 
+          durationin: 750; 
+          durationout: 750; 
+          easingin: easeOutQuint; 
+          rotatein: 90; 
+          rotateout: -90; 
+          scalein: .5; 
+		  scaleout: .5; 
+		   showuntil: 4000;
+          ">
+            <a style="    text-shadow: 2px 2px 4px #444444; color: black;  -webkit-text-fill-color: white ;  -webkit-text-stroke-width: 1px;"
+              href="<?php echo base_url('frontweb/Productshow/') . $data->id . '/' . $data->slug ?>"> <?php echo $data->name ?> </a>
+
+          </div>
+        </div>
+      <?php }  ?>
+    <?php } ?>
+
     <!-- slide four start -->
 
     <!-- slide four end -->
@@ -43,7 +108,7 @@
                   </div>
                 </div>
                 <h3><a href="<?php echo base_url('frontweb/Productshow/') . $key->id . '/' . $key->slug ?>"> <?php echo $key->name ?> </a></h3>
-               
+
               </div>
             </div>
 
@@ -83,7 +148,7 @@
                     <!-- <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a> -->
                   </div>
                 </div>
-                <h3><a href="<?php echo base_url() . $key->idartikel . '/' . $key->slug ?>"> <?php echo $key->title ?> </a></h3>
+                <h3><a href="<?php echo base_url()."frontweb/artikeldetail/". $key->idartikel . '/' . $key->slug ?>"> <?php echo $key->title ?> </a></h3>
 
               </div>
             </div>
